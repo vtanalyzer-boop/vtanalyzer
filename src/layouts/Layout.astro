@@ -23,6 +23,15 @@ const { title, description, path, ogImage, noindex, jsonLd } = Astro.props;
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <Seo title={title} description={description} path={path} ogImage={ogImage} noindex={noindex} jsonLd={jsonLd} />
 
+    <!-- Google tag (gtag.js) -->
+    <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-TPRE21PBVE"></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-TPRE21PBVE');
+    </script>
+
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
