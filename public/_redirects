@@ -1,0 +1,8 @@
+# Cloudflare Pages redirects
+# Legacy flat-file URLs from the previous static site -> new Astro routes
+/about.html          /about/            301
+/contact.html         /contact/          301
+/how-to.html           /how-it-works/     301
+/privacy.html          /privacy-policy/   301
+/terms.html            /terms-of-service/ 301
+/disclaimer.html       /disclaimer/       301

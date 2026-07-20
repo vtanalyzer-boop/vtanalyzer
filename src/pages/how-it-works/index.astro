@@ -1,0 +1,152 @@
+---
+import Layout from "../../layouts/Layout.astro";
+
+const title = "How the YouTube Thumbnail Analyzer Works | VT Analyzer";
+const description =
+  "See exactly how our YouTube thumbnail analyzer scores your thumbnail — from upload to readability, contrast, focal point, and mobile vs. web scoring.";
+
+const steps = [
+  {
+    n: "01",
+    title: "Upload Your Thumbnail",
+    body: "Drag & drop an image, browse a file from your device, or paste an image URL. We support JPG, PNG, and WebP files. Nothing is uploaded to a server — the image is read directly in your browser.",
+  },
+  {
+    n: "02",
+    title: "Local Image Analysis",
+    body: "The analyzer samples the image's pixels to measure contrast (tonal separation), color saturation, brightness balance, and a focal-point proxy based on regional variance across the frame — the same signals design research ties to click-through rate.",
+  },
+  {
+    n: "03",
+    title: "Spec Checks",
+    body: "We check resolution against YouTube's recommended 1280×720, verify the 16:9 aspect ratio, and flag file sizes that risk YouTube's 2MB upload limit.",
+  },
+  {
+    n: "04",
+    title: "Mobile & Web Scores",
+    body: "Because a thumbnail reads differently at mobile size than on a large desktop screen, we generate two separate weighted scores — mobile leans harder on readability and contrast, web leans harder on focal point and detail.",
+  },
+  {
+    n: "05",
+    title: "Actionable Suggestions",
+    body: "Instead of a plain number, you get a ranked breakdown table and specific suggestions — like boosting contrast or simplifying the composition — tied to whichever factors are holding your score back.",
+  },
+];
+
+const factors = [
+  { name: "Readability", weight: "20%", detail: "Can the subject and any text be understood in under a second, even at a small size?" },
+  { name: "Contrast", weight: "15%", detail: "Tonal separation between the subject and background so nothing blends in." },
+  { name: "Focal Point", weight: "15%", detail: "Is there one clear thing the eye lands on first, rather than a cluttered frame?" },
+  { name: "Color Saturation", weight: "10%", detail: "Vibrant, punchy colors tend to stand out more in a crowded feed." },
+  { name: "Brightness Balance", weight: "10%", detail: "Not too dark, not blown out — a balanced exposure reads clearly on any screen." },
+  { name: "Aspect Ratio", weight: "10%", detail: "Matching YouTube's 16:9 standard avoids automatic cropping." },
+  { name: "Resolution", weight: "10%", detail: "Meeting the 1280×720 recommendation keeps the image sharp at every placement." },
+  { name: "File Size", weight: "10%", detail: "Staying well under the 2MB cap for reliable, fast-loading thumbnails." },
+];
+---
+
+<Layout title={title} description={description} path="/how-it-works/">
+  <section class="bg-void py-16 text-mist sm:py-20">
+    <div class="mx-auto max-w-3xl px-5 text-center">
+      <p class="font-mono-num text-xs uppercase tracking-[0.25em] text-red">Process</p>
+      <h1 class="mt-3 font-display text-4xl font-bold sm:text-5xl">How Our Thumbnail Analyzer Works</h1>
+      <p class="mx-auto mt-4 max-w-xl text-mist/60">
+        A transparent look at the process behind every thumbnail score, mobile preview, and suggestion.
+      </p>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-3xl px-5 pt-16">
+    <p class="text-sm leading-relaxed text-ink/65 dark:text-smoke sm:text-base">
+      Most thumbnail advice online boils down to vague suggestions like "make it pop" or "use
+      bright colors," without explaining what those phrases actually mean in measurable terms. We
+      wanted our analyzer to be different: every score it produces should be traceable back to a
+      specific, explainable factor, so you understand exactly why a thumbnail scored the way it
+      did and what to change first. The five-step process below is the same one that runs every
+      time you drop an image into the tool on our homepage, whether you're checking a single
+      thumbnail or comparing a handful of variants before choosing one to publish.
+    </p>
+  </section>
+
+  <section class="mx-auto max-w-3xl px-5 py-16">
+    <div class="space-y-10">
+      {steps.map((s) => (
+        <div class="flex gap-6">
+          <p class="font-mono-num shrink-0 text-3xl font-bold text-red/30">{s.n}</p>
+          <div>
+            <h2 class="font-display text-lg font-bold text-ink dark:text-fog">{s.title}</h2>
+            <p class="mt-2 text-sm leading-relaxed text-ink/60 dark:text-smoke">{s.body}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="border-y border-ink/10 dark:border-seam bg-paper-dim dark:bg-night-dim py-20">
+    <div class="mx-auto max-w-4xl px-5">
+      <p class="font-mono-num text-xs uppercase tracking-[0.25em] text-red">Scoring Weights</p>
+      <h2 class="mt-3 font-display text-3xl font-bold text-ink dark:text-fog sm:text-4xl">What We Analyze &amp; Why It's Weighted That Way</h2>
+      <div class="mt-10 overflow-hidden rounded-sm border border-line dark:border-seam bg-card dark:bg-charcoal">
+        {factors.map((f, i) => (
+          <div class:list={["flex flex-col gap-1 px-6 py-5 sm:flex-row sm:items-center sm:gap-6", i !== 0 && "border-t border-ink/10 dark:border-seam"]}>
+            <div class="flex items-center gap-3 sm:w-48 sm:shrink-0">
+              <span class="font-mono-num text-sm font-bold text-red">{f.weight}</span>
+              <span class="font-display text-sm font-semibold text-ink dark:text-fog">{f.name}</span>
+            </div>
+            <p class="text-sm text-ink/60 dark:text-smoke">{f.detail}</p>
+          </div>
+        ))}
+      </div>
+      <p class="mt-6 text-xs text-ink/40 dark:text-smoke">
+        Weights reflect general design and readability best practices for small preview images. They're a
+        guide for improving your design, not a guarantee of YouTube performance — see our
+        <a href="/disclaimer/" class="text-red underline underline-offset-2">disclaimer</a> for details.
+      </p>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-3xl px-5 py-20">
+    <p class="font-mono-num text-xs uppercase tracking-[0.25em] text-red">Mobile vs. Web</p>
+    <h2 class="mt-3 font-display text-3xl font-bold text-ink dark:text-fog sm:text-4xl">Why We Score Mobile and Web Separately</h2>
+    <p class="mt-5 text-sm leading-relaxed text-ink/65 dark:text-smoke sm:text-base">
+      A thumbnail rarely looks the same twice. On a phone, it might appear at roughly 120 by 68
+      pixels in a search results list — small enough that thin fonts, subtle shadows, and busy
+      backgrounds disappear entirely. On a laptop or desktop browser, the same image can display
+      two to three times larger inside the YouTube homepage grid, where fine detail and secondary
+      elements are far more visible. Because most watch time on YouTube happens on mobile devices,
+      a thumbnail that only looks good on a large screen can quietly underperform in the exact
+      context where it's seen most often.
+    </p>
+    <p class="mt-4 text-sm leading-relaxed text-ink/65 dark:text-smoke sm:text-base">
+      That's why our analyzer doesn't collapse everything into a single number. The mobile score
+      weighs readability and contrast more heavily, since those are the factors that survive
+      shrinking. The web score gives more weight to focal point and fine detail, since a larger
+      canvas gives a viewer more time and space to take in a slightly more complex composition. If
+      your mobile score is noticeably lower than your web score, that's usually a sign your text is
+      too small or your subject is too far from the center of the frame — both easy fixes once you
+      know to look for them.
+    </p>
+  </section>
+
+  <section class="border-t border-line dark:border-seam bg-paper-dim dark:bg-night-dim py-20">
+    <div class="mx-auto max-w-3xl px-5">
+      <p class="font-mono-num text-xs uppercase tracking-[0.25em] text-red">Practical Tips</p>
+      <h2 class="mt-3 font-display text-3xl font-bold text-ink dark:text-fog sm:text-4xl">Quick Wins Before You Re-Analyze</h2>
+      <ul class="mt-6 space-y-4 text-sm leading-relaxed text-ink/65 dark:text-smoke sm:text-base">
+        <li><strong class="text-ink dark:text-fog">Zoom out to phone size first.</strong> Shrink your thumbnail preview down to roughly the size of a postage stamp. If you can't tell what it's about in under two seconds, a viewer scrolling their feed won't either.</li>
+        <li><strong class="text-ink dark:text-fog">Keep text to five words or fewer.</strong> Short, bold headlines survive compression and small display sizes far better than a full sentence.</li>
+        <li><strong class="text-ink dark:text-fog">Give faces room to breathe.</strong> Expressions read best when the face isn't cropped too tight against the frame edge or competing with busy text nearby.</li>
+        <li><strong class="text-ink dark:text-fog">Use an outline or drop shadow behind text.</strong> A one to two pixel dark outline keeps light-colored text legible over almost any background.</li>
+        <li><strong class="text-ink dark:text-fog">Re-check after every major edit.</strong> Small changes — a recolored background, a resized headline — can shift your score more than expected, so it's worth a quick re-analysis before publishing.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-2xl px-5 py-20 text-center">
+    <h2 class="font-display text-2xl font-bold text-ink dark:text-fog sm:text-3xl">Try It on Your Own Thumbnail</h2>
+    <p class="mt-3 text-ink/60 dark:text-smoke">See your mobile and web scores in seconds.</p>
+    <a href="/#analyzer" class="mt-6 inline-block rounded-sm bg-red px-6 py-3 text-sm font-semibold text-white hover:bg-red-dark">
+      Analyze My Thumbnail
+    </a>
+  </section>
+</Layout>

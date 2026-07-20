@@ -1,0 +1,418 @@
+<section id="analyzer" class="relative bg-void py-20 text-mist">
+  <div class="scanlines pointer-events-none absolute inset-0 opacity-40"></div>
+  <div class="relative mx-auto max-w-5xl px-5">
+    <div class="mx-auto max-w-2xl text-center">
+      <p class="font-mono-num text-xs uppercase tracking-[0.25em] text-red">Free Thumbnail Analyzer</p>
+      <h2 class="mt-3 font-display text-3xl font-bold sm:text-4xl">Upload Your Thumbnail</h2>
+      <p class="mt-3 text-mist/60">
+        Drop an image, browse a file, or paste a URL. Your thumbnail image never leaves your
+        browser — every score below is calculated locally.
+      </p>
+    </div>
+
+    <div class="mt-10 rounded-lg border border-white/10 bg-white/[0.03] p-4 sm:p-8">
+      <div class="grid grid-cols-1 gap-4 sm:grid-cols-3">
+        <div
+          id="dropZone"
+          class="viewfinder flex cursor-pointer flex-col items-center justify-center gap-2 rounded-sm border border-dashed border-white/20 bg-white/[0.02] px-4 py-10 text-center transition-colors hover:border-red/60"
+        >
+          <span class="vf-tr"></span><span class="vf-br"></span>
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="text-red">
+            <path d="M12 16V4M12 4L7 9M12 4L17 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+            <path d="M4 16V18C4 19.1046 4.89543 20 6 20H18C19.1046 20 20 19.1046 20 18V16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+          <h3 class="font-display text-sm font-semibold">Drag &amp; Drop</h3>
+          <p class="text-xs text-mist/50">Drop your thumbnail here</p>
+        </div>
+
+        <label
+          id="browseZone"
+          class="flex cursor-pointer flex-col items-center justify-center gap-2 rounded-sm border border-white/10 bg-white/[0.02] px-4 py-10 text-center transition-colors hover:border-red/60"
+        >
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="text-red">
+            <path d="M3 7C3 5.89543 3.89543 5 5 5H9L11 7H19C20.1046 7 21 7.89543 21 9V17C21 18.1046 20.1046 19 19 19H5C3.89543 19 3 18.1046 3 17V7Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round" />
+          </svg>
+          <h3 class="font-display text-sm font-semibold">Browse Files</h3>
+          <p class="text-xs text-mist/50">JPG, PNG, or WebP</p>
+          <input id="fileInput" type="file" accept="image/*" class="hidden" />
+        </label>
+
+        <div class="flex flex-col items-center justify-center gap-2 rounded-sm border border-white/10 bg-white/[0.02] px-4 py-6 text-center">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="text-red">
+            <path d="M9 12H15M12 9V15" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+            <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2" />
+          </svg>
+          <h3 class="font-display text-sm font-semibold">Paste Image URL</h3>
+          <div class="mt-1 flex w-full gap-2">
+            <input
+              id="urlInput"
+              type="text"
+              placeholder="https://..."
+              class="w-full min-w-0 rounded-sm border border-white/15 bg-transparent px-2 py-2 text-xs text-mist placeholder:text-mist/30 focus:border-red focus:outline-none"
+            />
+            <button id="urlSubmit" class="shrink-0 rounded-sm bg-red px-3 py-2 text-xs font-semibold text-white hover:bg-red-dark">
+              Go
+            </button>
+          </div>
+        </div>
+      </div>
+      <p id="errorMsg" class="mt-4 hidden text-center text-sm text-red-light"></p>
+    </div>
+
+    <!-- Loading -->
+    <div id="loading" class="mt-10 hidden text-center">
+      <div class="mx-auto h-10 w-10 animate-spin rounded-full border-4 border-white/10 border-t-red"></div>
+      <p class="mt-4 text-sm text-mist/60">Analyzing readability, contrast, and composition…</p>
+    </div>
+
+    <!-- Results -->
+    <div id="results" class="mt-12 hidden">
+      <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+        <div class="rounded-sm border border-white/10 bg-white/[0.03] p-6 text-center">
+          <p class="font-mono-num text-xs uppercase tracking-widest text-mist/50">Mobile Score</p>
+          <p id="mobileScore" class="mt-2 font-mono-num text-4xl font-bold">--/100</p>
+          <span id="mobileGrade" class="mt-3 inline-block rounded-full px-3 py-1 text-xs font-semibold"></span>
+        </div>
+        <div class="rounded-sm border border-white/10 bg-white/[0.03] p-6 text-center">
+          <p class="font-mono-num text-xs uppercase tracking-widest text-mist/50">Web / Desktop Score</p>
+          <p id="webScore" class="mt-2 font-mono-num text-4xl font-bold">--/100</p>
+          <span id="webGrade" class="mt-3 inline-block rounded-full px-3 py-1 text-xs font-semibold"></span>
+        </div>
+      </div>
+
+      <div class="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
+        <div class="rounded-sm border border-white/10 bg-white/[0.03] p-5">
+          <p class="mb-3 text-xs font-semibold uppercase tracking-widest text-mist/50">Mobile Preview (search result)</p>
+          <div class="viewfinder mx-auto w-40 overflow-hidden rounded-sm bg-black">
+            <span class="vf-tr"></span><span class="vf-br"></span>
+            <img id="mobilePreview" alt="Mobile thumbnail preview" class="aspect-video w-full object-cover" />
+          </div>
+        </div>
+        <div class="rounded-sm border border-white/10 bg-white/[0.03] p-5">
+          <p class="mb-3 text-xs font-semibold uppercase tracking-widest text-mist/50">Web Preview (desktop grid)</p>
+          <div class="viewfinder mx-auto w-64 overflow-hidden rounded-sm bg-black">
+            <span class="vf-tr"></span><span class="vf-br"></span>
+            <img id="webPreview" alt="Web thumbnail preview" class="aspect-video w-full object-cover" />
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-6 rounded-sm border border-white/10 bg-white/[0.03] p-6">
+        <p class="mb-4 text-xs font-semibold uppercase tracking-widest text-mist/50">Score Breakdown</p>
+        <div class="overflow-x-auto">
+          <table class="w-full min-w-[480px] text-left text-sm">
+            <thead>
+              <tr class="border-b border-white/10 text-mist/50">
+                <th class="py-2 pr-4 font-medium">Factor</th>
+                <th class="py-2 pr-4 font-medium">Score</th>
+                <th class="py-2 font-medium">Notes</th>
+              </tr>
+            </thead>
+            <tbody id="breakdownBody" class="divide-y divide-white/5"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="mt-6 rounded-sm border border-red/30 bg-red/5 p-6">
+        <p class="mb-3 flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-red">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L14.5 8.5L21 9L16 13.5L17.5 20L12 16.5L6.5 20L8 13.5L3 9L9.5 8.5L12 2Z" fill="currentColor"/></svg>
+          Top Suggestions
+        </p>
+        <ul id="suggestionList" class="space-y-2 text-sm text-mist/75"></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const dropZone = document.getElementById("dropZone") as HTMLElement;
+  const browseZone = document.getElementById("browseZone") as HTMLElement;
+  const fileInput = document.getElementById("fileInput") as HTMLInputElement;
+  const urlInput = document.getElementById("urlInput") as HTMLInputElement;
+  const urlSubmit = document.getElementById("urlSubmit") as HTMLButtonElement;
+  const errorMsg = document.getElementById("errorMsg") as HTMLElement;
+  const loading = document.getElementById("loading") as HTMLElement;
+  const results = document.getElementById("results") as HTMLElement;
+
+  const mobileScoreEl = document.getElementById("mobileScore")!;
+  const webScoreEl = document.getElementById("webScore")!;
+  const mobileGradeEl = document.getElementById("mobileGrade")!;
+  const webGradeEl = document.getElementById("webGrade")!;
+  const mobilePreview = document.getElementById("mobilePreview") as HTMLImageElement;
+  const webPreview = document.getElementById("webPreview") as HTMLImageElement;
+  const breakdownBody = document.getElementById("breakdownBody")!;
+  const suggestionList = document.getElementById("suggestionList")!;
+
+  function showError(msg: string) {
+    errorMsg.textContent = msg;
+    errorMsg.classList.remove("hidden");
+  }
+  function clearError() {
+    errorMsg.classList.add("hidden");
+  }
+
+  ["dragover", "dragenter"].forEach((evt) =>
+    dropZone.addEventListener(evt, (e) => {
+      e.preventDefault();
+      dropZone.classList.add("border-red");
+    })
+  );
+  ["dragleave", "drop"].forEach((evt) =>
+    dropZone.addEventListener(evt, (e) => {
+      e.preventDefault();
+      dropZone.classList.remove("border-red");
+    })
+  );
+  dropZone.addEventListener("drop", (e: DragEvent) => {
+    const file = e.dataTransfer?.files?.[0];
+    if (file) analyzeFile(file);
+  });
+  dropZone.addEventListener("click", () => fileInput.click());
+
+  fileInput.addEventListener("change", () => {
+    if (fileInput.files?.[0]) analyzeFile(fileInput.files[0]);
+  });
+
+  urlSubmit.addEventListener("click", () => {
+    const url = urlInput.value.trim();
+    if (!url) {
+      showError("Please paste a valid image URL.");
+      return;
+    }
+    analyzeUrl(url);
+  });
+
+  function analyzeFile(file: File) {
+    clearError();
+    if (!file.type.match("image.*")) {
+      showError("Please upload an image file (JPG, PNG, or WebP).");
+      return;
+    }
+    const objectUrl = URL.createObjectURL(file);
+    runAnalysis(objectUrl, file.size);
+  }
+
+  function analyzeUrl(url: string) {
+    clearError();
+    runAnalysis(url, null);
+  }
+
+  function runAnalysis(src: string, fileSize: number | null) {
+    loading.classList.remove("hidden");
+    results.classList.add("hidden");
+
+    const img = new Image();
+    img.crossOrigin = "anonymous";
+    img.onload = () => {
+      try {
+        const data = sampleImage(img);
+        const analysis = computeScores(img.naturalWidth, img.naturalHeight, fileSize, data);
+        renderResults(src, analysis);
+      } catch (err) {
+        // Cross-origin canvas read can fail for some remote URLs — fall back to metadata-only scoring.
+        const analysis = computeScores(img.naturalWidth, img.naturalHeight, fileSize, null);
+        renderResults(src, analysis);
+      }
+      loading.classList.add("hidden");
+    };
+    img.onerror = () => {
+      loading.classList.add("hidden");
+      showError("Couldn't load that image. Check the URL or try uploading the file directly.");
+    };
+    img.src = src;
+  }
+
+  function sampleImage(img: HTMLImageElement) {
+    const canvas = document.createElement("canvas");
+    const w = 160;
+    const h = Math.round((img.naturalHeight / img.naturalWidth) * w) || 90;
+    canvas.width = w;
+    canvas.height = h;
+    const ctx = canvas.getContext("2d")!;
+    ctx.drawImage(img, 0, 0, w, h);
+    return ctx.getImageData(0, 0, w, h).data;
+  }
+
+  function computeScores(width: number, height: number, fileSize: number | null, pixels: Uint8ClampedArray | null) {
+    const ratio = width / height;
+    const targetRatio = 16 / 9;
+    const ratioDelta = Math.abs(ratio - targetRatio);
+    const aspectScore = Math.max(0, 10 - ratioDelta * 40); // out of 10
+
+    const resolutionScore =
+      width >= 1280 ? 10 : width >= 854 ? 8 : width >= 640 ? 6 : width > 0 ? 3 : 5;
+
+    let fileScore = 8; // default when unknown (remote URL)
+    if (fileSize !== null) {
+      const mb = fileSize / (1024 * 1024);
+      if (mb > 2) fileScore = 2;
+      else if (mb > 1) fileScore = 6;
+      else if (mb > 0.05) fileScore = 10;
+      else fileScore = 7;
+    }
+
+    let contrast = 0.5,
+      saturation = 0.5,
+      brightness = 0.5,
+      edgeVariance = 0.5;
+
+    if (pixels) {
+      let lumSum = 0,
+        lumSumSq = 0,
+        satSum = 0,
+        n = 0;
+      const lumas: number[] = [];
+      for (let i = 0; i < pixels.length; i += 4) {
+        const r = pixels[i] / 255,
+          g = pixels[i + 1] / 255,
+          b = pixels[i + 2] / 255;
+        const luma = 0.2126 * r + 0.7152 * g + 0.0722 * b;
+        const max = Math.max(r, g, b),
+          min = Math.min(r, g, b);
+        const sat = max === 0 ? 0 : (max - min) / max;
+        lumas.push(luma);
+        lumSum += luma;
+        satSum += sat;
+        n++;
+      }
+      const mean = lumSum / n;
+      for (const l of lumas) lumSumSq += (l - mean) ** 2;
+      const stdDev = Math.sqrt(lumSumSq / n);
+
+      brightness = mean;
+      contrast = Math.min(1, stdDev / 0.28); // normalize
+      saturation = satSum / n;
+
+      // crude focal-point proxy: local variance between quadrants
+      const quadMeans: number[] = [0, 0, 0, 0];
+      const quadCounts = [0, 0, 0, 0];
+      const w = 160,
+        h = pixels.length / 4 / w;
+      for (let i = 0; i < pixels.length; i += 4) {
+        const idx = i / 4;
+        const x = idx % w,
+          y = Math.floor(idx / w);
+        const qx = x < w / 2 ? 0 : 1;
+        const qy = y < h / 2 ? 0 : 1;
+        const q = qy * 2 + qx;
+        const luma = 0.2126 * (pixels[i] / 255) + 0.7152 * (pixels[i + 1] / 255) + 0.0722 * (pixels[i + 2] / 255);
+        quadMeans[q] += luma;
+        quadCounts[q]++;
+      }
+      for (let i = 0; i < 4; i++) quadMeans[i] /= quadCounts[i] || 1;
+      const quadAvg = quadMeans.reduce((a, b) => a + b, 0) / 4;
+      const quadVar = quadMeans.reduce((a, b) => a + (b - quadAvg) ** 2, 0) / 4;
+      edgeVariance = Math.min(1, Math.sqrt(quadVar) * 6);
+    }
+
+    const readabilityScore = Math.round(Math.min(20, contrast * 14 + edgeVariance * 6));
+    const contrastScore = Math.round(Math.min(15, contrast * 15));
+    const focalScore = Math.round(Math.min(15, edgeVariance * 15));
+    const saturationScore = Math.round(Math.min(10, saturation * 13));
+    const brightnessBalance = 1 - Math.abs(brightness - 0.5) * 1.6;
+    const brightnessScore = Math.round(Math.min(10, Math.max(2, brightnessBalance * 10)));
+
+    const mobileRaw =
+      readabilityScore * 1.15 +
+      contrastScore * 1.1 +
+      focalScore * 0.9 +
+      saturationScore * 0.9 +
+      brightnessScore * 0.8 +
+      aspectScore +
+      fileScore * 0.6 +
+      resolutionScore * 0.5;
+    const webRaw =
+      readabilityScore * 0.9 +
+      contrastScore * 0.9 +
+      focalScore * 1.1 +
+      saturationScore * 1.1 +
+      brightnessScore * 0.9 +
+      aspectScore +
+      fileScore * 0.7 +
+      resolutionScore * 1.0;
+
+    const maxRaw = 20 * 1.15 + 15 * 1.1 + 15 * 1.1 + 10 * 1.1 + 10 * 1.0 + 10 + 10 + 10; // approx normalizer
+
+    const mobileScore = Math.max(38, Math.min(98, Math.round((mobileRaw / maxRaw) * 100)));
+    const webScore = Math.max(38, Math.min(98, Math.round((webRaw / maxRaw) * 100)));
+
+    return {
+      width,
+      height,
+      ratio,
+      fileSize,
+      readabilityScore,
+      contrastScore,
+      focalScore,
+      saturationScore,
+      brightnessScore,
+      aspectScore: Math.round(aspectScore),
+      resolutionScore,
+      fileScore,
+      mobileScore,
+      webScore,
+    };
+  }
+
+  function gradeFor(score: number) {
+    if (score >= 80) return { label: "Great", classes: "bg-green/15 text-green" };
+    if (score >= 60) return { label: "Good", classes: "bg-amber/15 text-amber" };
+    return { label: "Needs Work", classes: "bg-red/15 text-red-light" };
+  }
+
+  function renderResults(src: string, a: ReturnType<typeof computeScores>) {
+    mobilePreview.src = src;
+    webPreview.src = src;
+
+    mobileScoreEl.textContent = `${a.mobileScore}/100`;
+    webScoreEl.textContent = `${a.webScore}/100`;
+
+    const mg = gradeFor(a.mobileScore);
+    const wg = gradeFor(a.webScore);
+    mobileGradeEl.textContent = mg.label;
+    mobileGradeEl.className = `mt-3 inline-block rounded-full px-3 py-1 text-xs font-semibold ${mg.classes}`;
+    webGradeEl.textContent = wg.label;
+    webGradeEl.className = `mt-3 inline-block rounded-full px-3 py-1 text-xs font-semibold ${wg.classes}`;
+
+    const rows: [string, string, string][] = [
+      ["Readability", `${a.readabilityScore}/20`, a.readabilityScore >= 15 ? "Text and subject read clearly at a glance." : "Increase contrast or simplify the composition."],
+      ["Contrast", `${a.contrastScore}/15`, a.contrastScore >= 11 ? "Strong tonal separation from background." : "Boost contrast between subject and background."],
+      ["Focal Point", `${a.focalScore}/15`, a.focalScore >= 11 ? "A clear point draws the eye first." : "Consider a single dominant subject or off-center framing."],
+      ["Color Saturation", `${a.saturationScore}/10`, a.saturationScore >= 7 ? "Vibrant colors that stand out in a feed." : "Colors look muted — try boosting saturation slightly."],
+      ["Brightness Balance", `${a.brightnessScore}/10`, a.brightnessScore >= 7 ? "Well-balanced exposure, not too dark or blown out." : "Image looks over- or under-exposed."],
+      ["Aspect Ratio", `${a.aspectScore}/10`, a.aspectScore >= 9 ? "Matches YouTube's 16:9 standard." : "Crop closer to a 16:9 ratio (1280×720)."],
+      ["Resolution", `${a.resolutionScore}/10`, `${a.width}×${a.height}px — ${a.resolutionScore >= 8 ? "meets YouTube's recommended size." : "below the recommended 1280×720."}`],
+      ["File Size", `${a.fileScore}/10`, a.fileSize ? `${(a.fileSize / 1024).toFixed(0)}KB — ${a.fileScore >= 7 ? "efficient for fast loading." : "consider compressing below 2MB."}` : "Not measurable for remote URLs."],
+    ];
+
+    breakdownBody.innerHTML = rows
+      .map(
+        ([factor, score, note]) => `
+      <tr>
+        <td class="py-2.5 pr-4 font-medium text-mist/90">${factor}</td>
+        <td class="py-2.5 pr-4 font-mono-num text-mist/80">${score}</td>
+        <td class="py-2.5 text-mist/55">${note}</td>
+      </tr>`
+      )
+      .join("");
+
+    const suggestions: string[] = [];
+    if (a.readabilityScore < 15) suggestions.push("Increase text size and use a bold, heavy-weight font so it reads clearly on mobile.");
+    if (a.contrastScore < 11) suggestions.push("Add a dark outline or drop shadow behind text to separate it from the background.");
+    if (a.focalScore < 11) suggestions.push("Simplify the scene around one clear subject instead of splitting attention across the frame.");
+    if (a.saturationScore < 7) suggestions.push("Boost color saturation slightly so the thumbnail pops in a crowded feed.");
+    if (a.aspectScore < 9) suggestions.push("Crop or export at exactly 1280×720 (16:9) to avoid YouTube auto-cropping your image.");
+    if (a.fileScore < 7 && a.fileSize) suggestions.push("Compress the image — large files can slow down thumbnail loading on slower connections.");
+    if (suggestions.length === 0) suggestions.push("Solid thumbnail overall — try A/B testing 2–3 variants in YouTube Studio to squeeze out more CTR.");
+
+    suggestionList.innerHTML = suggestions
+      .slice(0, 4)
+      .map(
+        (s) => `<li class="flex items-start gap-2"><span class="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-red"></span><span>${s}</span></li>`
+      )
+      .join("");
+
+    results.classList.remove("hidden");
+    results.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+</script>

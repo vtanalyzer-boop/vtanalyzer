@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://www.vtanalyzer.site/sitemap-index.xml
+Sitemap: https://www.vtanalyzer.site/sitemap.xml

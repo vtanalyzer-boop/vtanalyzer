@@ -1,0 +1,131 @@
+---
+import Layout from "../../layouts/Layout.astro";
+
+const title = "About VT Analyzer — Why We Built a YouTube Thumbnail Analyzer";
+const description =
+  "VT Analyzer helps creators optimize YouTube thumbnails with a free thumbnail checker built from real click-through-rate research, not generic design advice.";
+---
+
+<Layout title={title} description={description} path="/about/">
+  <section class="bg-void py-16 text-mist sm:py-20">
+    <div class="mx-auto max-w-3xl px-5 text-center">
+      <p class="font-mono-num text-xs uppercase tracking-[0.25em] text-red">About</p>
+      <h1 class="mt-3 font-display text-4xl font-bold sm:text-5xl">Built by Creators Tired of Guessing</h1>
+      <p class="mx-auto mt-4 max-w-xl text-mist/60">
+        VT Analyzer exists because great videos still get skipped over when the thumbnail doesn't earn the click.
+      </p>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-3xl space-y-16 px-5 py-20">
+    <div>
+      <h2 class="font-display text-2xl font-bold text-ink dark:text-fog">Our Story</h2>
+      <p class="mt-4 text-sm leading-relaxed text-ink/65 dark:text-smoke sm:text-base">
+        VT Analyzer started as an internal tool for our own channels. We kept noticing the same
+        pattern: hours spent editing a video, and then a thumbnail thrown together in ten minutes
+        that quietly capped how many people ever saw the work. Once we started treating the
+        thumbnail as seriously as the video itself — testing contrast, text size, and composition
+        before publishing — click-through rates moved in a way editing alone never did. What began
+        as a spreadsheet of notes turned into the analyzer you're using today.
+      </p>
+    </div>
+
+    <div>
+      <h2 class="font-display text-2xl font-bold text-ink dark:text-fog">Our Approach</h2>
+      <p class="mt-4 text-sm leading-relaxed text-ink/65 dark:text-smoke sm:text-base">
+        A good thumbnail sits at the intersection of design and attention: it has to read instantly,
+        at a tiny size, in a feed full of competing images. Generic design advice doesn't account
+        for that context. Our scoring model is built specifically around how thumbnails are actually
+        displayed on YouTube — mobile search results, the desktop homepage grid, and suggested
+        videos — rather than treating a thumbnail like any other graphic.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 gap-8 sm:grid-cols-2">
+      <div class="rounded-sm border border-ink/10 dark:border-seam bg-paper-dim dark:bg-night-dim p-6">
+        <h3 class="font-display text-lg font-bold text-ink dark:text-fog">Our Mission</h3>
+        <p class="mt-3 text-sm leading-relaxed text-ink/60 dark:text-smoke">
+          Make professional-grade thumbnail feedback available to every creator, regardless of
+          channel size or budget, so click-through rate stops being a guessing game.
+        </p>
+      </div>
+      <div class="rounded-sm border border-ink/10 dark:border-seam bg-paper-dim dark:bg-night-dim p-6">
+        <h3 class="font-display text-lg font-bold text-ink dark:text-fog">Our Vision</h3>
+        <p class="mt-3 text-sm leading-relaxed text-ink/60 dark:text-smoke">
+          A world where designing a thumbnail that both represents your content honestly and earns
+          the click is a fast, confident step — not the last-minute afterthought it often is today.
+        </p>
+      </div>
+    </div>
+
+    <div class="rounded-sm border border-red/20 bg-red/5 p-6">
+      <h3 class="font-display text-lg font-bold text-ink dark:text-fog">Why Trust Our Analysis?</h3>
+      <p class="mt-3 text-sm leading-relaxed text-ink/60 dark:text-smoke">
+        Our scoring weights are grounded in well-documented attention and readability
+        principles — contrast, focal point, and legibility at small sizes — applied specifically
+        to YouTube's display contexts. We're upfront that no tool can guarantee performance, since
+        YouTube's algorithm, your content, and audience behavior all play a role too. See our
+        <a href="/disclaimer/" class="text-red underline underline-offset-2">disclaimer</a> for the full picture.
+      </p>
+    </div>
+
+    <div>
+      <h2 class="font-display text-2xl font-bold text-ink dark:text-fog">How the Analyzer Is Built</h2>
+      <p class="mt-4 text-sm leading-relaxed text-ink/65 dark:text-smoke sm:text-base">
+        Rather than sending your image to a server, VT Analyzer processes every thumbnail directly
+        inside your browser using the HTML5 Canvas API. When you upload or paste an image, the
+        analyzer samples its pixels to measure contrast, color saturation, and brightness balance,
+        then applies a focal-point calculation that looks at how visual weight is distributed
+        across the frame. Those raw numbers are converted into a weighted score modeled on
+        published research about visual attention, readability at small sizes, and how thumbnails
+        are actually displayed across YouTube's mobile app, desktop homepage, search results, and
+        suggested-video rail. We built it this way deliberately: no upload queue, no server storage
+        of your images, and no waiting.
+      </p>
+    </div>
+
+    <div>
+      <h2 class="font-display text-2xl font-bold text-ink dark:text-fog">Who VT Analyzer Is For</h2>
+      <p class="mt-4 text-sm leading-relaxed text-ink/65 dark:text-smoke sm:text-base">
+        We built this tool for the full range of people who publish on YouTube — solo creators
+        uploading their first video, established channels running weekly release schedules, video
+        editors preparing deliverables for a client, social media managers juggling several
+        channels at once, and small agencies that need a fast, consistent way to sanity-check a
+        thumbnail before it goes live. Whether you're designing a MrBeast-style reaction thumbnail,
+        a calm and minimal tutorial cover, a Fortnite or gaming highlight image, or a template
+        exported from Canva, the same underlying readability and contrast principles apply, and the
+        analyzer scores all of them on the same scale.
+      </p>
+    </div>
+
+    <div>
+      <h2 class="font-display text-2xl font-bold text-ink dark:text-fog">Our Values</h2>
+      <ul class="mt-4 space-y-3 text-sm leading-relaxed text-ink/65 dark:text-smoke sm:text-base">
+        <li><strong class="text-ink dark:text-fog">Privacy by default.</strong> Your thumbnail is analyzed on your device. We don't need a copy of it to help you improve it.</li>
+        <li><strong class="text-ink dark:text-fog">Honest limitations.</strong> We'd rather tell you what a design tool can't promise than oversell a score.</li>
+        <li><strong class="text-ink dark:text-fog">Free access first.</strong> The core analyzer stays free, because the creators who need feedback the most are often the ones just starting out.</li>
+        <li><strong class="text-ink dark:text-fog">Plain-language explanations.</strong> Every score comes with a reason, not just a number, so you actually learn something you can reuse on the next thumbnail.</li>
+      </ul>
+    </div>
+
+    <div>
+      <h2 class="font-display text-2xl font-bold text-ink dark:text-fog">Where We're Based</h2>
+      <p class="mt-4 text-sm leading-relaxed text-ink/65 dark:text-smoke sm:text-base">
+        VT Analyzer is operated from our office at 202, Princes Business Park, Vijay Nagar, Indore,
+        Madhya Pradesh, India. While the tool serves creators worldwide, we keep a real office and a
+        small, hands-on team specifically so support requests get a human response rather than an
+        automated one.
+      </p>
+    </div>
+  </section>
+
+  <section class="border-t border-ink/10 dark:border-seam bg-paper-dim dark:bg-night-dim py-16 text-center">
+    <div class="mx-auto max-w-xl px-5">
+      <h2 class="font-display text-2xl font-bold text-ink dark:text-fog">Have a question or feature idea?</h2>
+      <p class="mt-3 text-sm text-ink/60 dark:text-smoke">We read every message.</p>
+      <a href="/contact/" class="mt-6 inline-block rounded-sm bg-red px-6 py-3 text-sm font-semibold text-white hover:bg-red-dark">
+        Get in Touch
+      </a>
+    </div>
+  </section>
+</Layout>

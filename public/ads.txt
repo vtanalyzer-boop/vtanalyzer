@@ -1,0 +1,10 @@
+# ads.txt for VT Analyzer (vtanalyzer.site)
+# This file authorizes digital sellers to sell ad inventory on this domain,
+# per the IAB Tech Lab ads.txt specification: https://iabtechlab.com/ads-txt/
+#
+# IMPORTANT: Replace the placeholder publisher ID below with the real
+# Google AdSense Publisher ID from your AdSense account
+# (Account > Account information > Publisher ID, formats as pub-XXXXXXXXXXXXXXXX)
+# before submitting this site for AdSense review.
+
+google.com, pub-0000000000000000, DIRECT, f08c47fec0942fa0
