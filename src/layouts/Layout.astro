@@ -36,9 +36,22 @@ const { title, description, path, ogImage, noindex, jsonLd } = Astro.props;
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
+      rel="preload"
+      as="style"
       href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap"
-      rel="stylesheet"
     />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap"
+      media="print"
+      onload="this.media='all'"
+    />
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap"
+      />
+    </noscript>
 
     <!-- Apply saved/system theme before first paint to avoid a light/dark flash -->
     <script is:inline>
@@ -116,6 +129,20 @@ const { title, description, path, ogImage, noindex, jsonLd } = Astro.props;
         }
       };
     </script>
-    <script is:inline async src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    <script is:inline>
+      (function () {
+        function loadTranslate() {
+          var s = document.createElement("script");
+          s.src = "https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit";
+          s.async = true;
+          document.body.appendChild(s);
+        }
+        if ("requestIdleCallback" in window) {
+          requestIdleCallback(loadTranslate, { timeout: 3000 });
+        } else {
+          setTimeout(loadTranslate, 1500);
+        }
+      })();
+    </script>
   </body>
 </html>
