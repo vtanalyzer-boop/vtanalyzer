@@ -23,15 +23,6 @@ const { title, description, path, ogImage, noindex, jsonLd } = Astro.props;
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <Seo title={title} description={description} path={path} ogImage={ogImage} noindex={noindex} jsonLd={jsonLd} />
 
-    <!-- Google tag (gtag.js) -->
-    <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-TPRE21PBVE"></script>
-    <script is:inline>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-TPRE21PBVE');
-    </script>
-
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -79,7 +70,19 @@ const { title, description, path, ogImage, noindex, jsonLd } = Astro.props;
     <!-- Multi-language support: Google Website Translator, driven by the
          custom language switcher in the header (no default widget UI shown). -->
     <div id="google_translate_element" class="notranslate" aria-hidden="true"></div>
+
+    <!-- Third-party scripts (Google Analytics + Google Translate) are loaded
+         together, after the page has painted. Both are fetched on whichever
+         happens first: the browser going idle, the user interacting with the
+         page, or a short safety timeout — so they never compete with critical
+         CSS/JS for bandwidth or the main thread during First/Largest
+         Contentful Paint, but still load quickly for real visitors. -->
     <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      gtag("js", new Date());
+      gtag("config", "G-TPRE21PBVE");
+
       function googleTranslateElementInit() {
         try {
           new google.translate.TranslateElement(
@@ -128,19 +131,34 @@ const { title, description, path, ogImage, noindex, jsonLd } = Astro.props;
           location.reload();
         }
       };
-    </script>
-    <script is:inline>
+
       (function () {
-        function loadTranslate() {
-          var s = document.createElement("script");
-          s.src = "https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit";
-          s.async = true;
-          document.body.appendChild(s);
+        var loaded = false;
+        function loadThirdParty() {
+          if (loaded) return;
+          loaded = true;
+
+          var ga = document.createElement("script");
+          ga.src = "https://www.googletagmanager.com/gtag/js?id=G-TPRE21PBVE";
+          ga.async = true;
+          document.head.appendChild(ga);
+
+          var tr = document.createElement("script");
+          tr.src = "https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit";
+          tr.async = true;
+          document.body.appendChild(tr);
         }
+
+        ["scroll", "keydown", "mousemove", "touchstart", "pointerdown"].forEach(function (evt) {
+          window.addEventListener(evt, loadThirdParty, { once: true, passive: true });
+        });
+
         if ("requestIdleCallback" in window) {
-          requestIdleCallback(loadTranslate, { timeout: 3000 });
+          requestIdleCallback(loadThirdParty, { timeout: 4000 });
         } else {
-          setTimeout(loadTranslate, 1500);
+          window.addEventListener("load", function () {
+            setTimeout(loadThirdParty, 2000);
+          });
         }
       })();
     </script>
