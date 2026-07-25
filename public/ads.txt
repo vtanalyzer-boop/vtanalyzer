@@ -7,4 +7,4 @@
 # (Account > Account information > Publisher ID, formats as pub-XXXXXXXXXXXXXXXX)
 # before submitting this site for AdSense review.
 
-google.com, pub-0000000000000000, DIRECT, f08c47fec0942fa0
+google.com, pub-4088751665413869, DIRECT, f08c47fec0942fa0
