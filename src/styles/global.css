@@ -26,9 +26,15 @@
   --color-smoke: #c8c7c2;
   --color-seam: #2c2c33;
 
-  /* Brand accent (kept distinct from any single platform's brand red) */
+  /* Brand accent (kept distinct from any single platform's brand red).
+     --color-red (#ff0033) reads at ~4:1 against white text/light backgrounds
+     — below the WCAG AA 4.5:1 text threshold — so it's reserved for the
+     fixed-dark brand bands (bg-void) where it's paired with near-black and
+     comfortably passes. Everywhere else (buttons, links, labels on paper/
+     card/paper-dim backgrounds), use --color-red-dark instead. */
   --color-red: #ff0033;
   --color-red-dark: #d40029;
+  --color-red-darker: #a80021;
   --color-red-light: #ff3b5c;
   --color-amber: #ffb100;
   --color-green: #22c55e;

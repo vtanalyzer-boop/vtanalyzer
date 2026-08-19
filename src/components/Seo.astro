@@ -17,7 +17,7 @@ const {
   jsonLd,
 } = Astro.props;
 
-const site = Astro.site ?? new URL("https://www.vtanalyzer.site");
+const site = Astro.site ?? new URL("https://vtanalyzer.site");
 const canonicalURL = new URL(path, site).toString();
 const ogImageURL = new URL(ogImage, site).toString();
 const jsonLdList = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];

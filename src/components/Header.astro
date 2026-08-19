@@ -21,8 +21,8 @@ const current = Astro.url.pathname;
         <a
           href={item.href}
           class:list={[
-            "text-sm font-medium transition-colors hover:text-red",
-            current === item.href ? "text-red" : "text-ink/75 dark:text-smoke",
+            "text-sm font-medium transition-colors hover:text-red-dark dark:hover:text-red",
+            current === item.href ? "text-red-dark dark:text-red" : "text-ink/75 dark:text-smoke",
           ]}
         >
           {item.label}
@@ -84,7 +84,7 @@ const current = Astro.url.pathname;
 
       <a
         href="/#analyzer"
-        class="hidden rounded-md bg-red px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-red-dark lg:inline-block"
+        class="hidden rounded-md bg-red-dark px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-red-darker lg:inline-block"
       >
         Analyze Thumbnail
       </a>
@@ -115,7 +115,7 @@ const current = Astro.url.pathname;
             href={item.href}
             class:list={[
               "mobile-nav-link block rounded-md px-3 py-2.5 text-sm font-medium",
-              current === item.href ? "bg-red/10 text-red" : "text-ink/80 dark:text-smoke",
+              current === item.href ? "bg-red/10 text-red-dark dark:text-red" : "text-ink/80 dark:text-smoke",
             ]}
           >
             {item.label}

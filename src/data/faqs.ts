@@ -18,6 +18,42 @@ export const faqs: Faq[] = [
       "A YouTube thumbnail is the still image that appears next to your video's title across YouTube — in search results, the homepage feed, suggested videos, and playlists. YouTube either auto-generates one from a frame of your video or lets you upload a custom image once your channel is verified. Custom thumbnails almost always outperform auto-generated frames because creators can design them specifically for readability and click-through rate.",
   },
   {
+    category: "Sizing & Specs",
+    question: "What are YouTube thumbnail measurements in pixels?",
+    answer:
+      "YouTube thumbnail measurements are 1280 pixels wide by 720 pixels tall — a 16:9 widescreen frame, with a 640-pixel-wide minimum and a 2MB file size cap. Those exact measurements matter because they match the resolution YouTube actually renders thumbnails at across search, suggested videos, and the homepage feed, so an image sized correctly up front avoids YouTube stretching, cropping, or compressing it after upload.",
+  },
+  {
+    category: "Sizing & Specs",
+    question: "What is the YouTube thumbnail aspect ratio?",
+    answer:
+      "YouTube thumbnails use a 16:9 aspect ratio — the same widescreen ratio as YouTube video playback itself. Any image that isn't 16:9 (a square Instagram export, a 4:3 photo, or a vertical Shorts-style crop) gets auto-cropped or letterboxed by YouTube to fit that ratio, which often cuts off faces, text, or key details near the edges. Designing directly at 1280×720 keeps the full ratio intact and avoids that automatic crop.",
+  },
+  {
+    category: "Sizing & Specs",
+    question: "What resolution should a YouTube thumbnail be?",
+    answer:
+      "1280×720 (720p) is the resolution YouTube recommends and actually displays thumbnails at, so it's the practical target regardless of your source footage or camera resolution. Uploading something lower, like 640×360, can look soft or pixelated once YouTube scales it up to fit the 1280-pixel-wide slots in search and suggested videos, while uploading much higher than 1280×720 adds file size without any visible sharpness gain, since YouTube discards the extra pixels.",
+  },
+  {
+    category: "Tools & Creation",
+    question: "How do I generate a YouTube thumbnail?",
+    answer:
+      "Most creators generate a YouTube thumbnail one of three ways: designing it from scratch in a tool like Canva or Photoshop at 1280×720, pulling and editing a still frame from the video itself, or using an AI image generator for the background or scene and adding bold headline text on top afterward. Whichever method you use, export at 1280×720, keep the file under 2MB, and run it through a thumbnail checker before publishing to confirm it reads clearly at both mobile and desktop size.",
+  },
+  {
+    category: "Testing & Optimization",
+    question: "What is a thumbnail viewer and how is it different from an analyzer?",
+    answer:
+      "A thumbnail viewer simply lets you preview what a thumbnail looks like — often at different sizes or against a mock YouTube layout — without scoring it. A thumbnail analyzer goes further: alongside a mobile and desktop preview, it evaluates the image against contrast, readability, focal point, and other click-through-rate factors and returns a numeric score plus specific fixes, so you're not just looking at the image but getting actionable feedback on it.",
+  },
+  {
+    category: "Rules & Policy",
+    question: "Why does my YouTube video have no custom thumbnail option?",
+    answer:
+      "If YouTube isn't giving you the option to upload a custom thumbnail, it's almost always because your channel hasn't completed phone number verification yet — this is a required step, free to complete in YouTube Studio under Settings → Channel → Feature eligibility. Until it's verified, YouTube will only show an auto-generated frame pulled from the video itself rather than letting you upload your own image.",
+  },
+  {
     category: "Basics",
     question: "What is a thumbnail sketch?",
     answer:

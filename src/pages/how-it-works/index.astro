@@ -1,9 +1,9 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 
-const title = "How the YouTube Thumbnail Analyzer Works | VT Analyzer";
+const title = "How Our YouTube Thumbnail SEO Score Checker Works | VT Analyzer";
 const description =
-  "See exactly how our YouTube thumbnail analyzer scores your thumbnail — from upload to readability, contrast, focal point, and mobile vs. web scoring.";
+  "See exactly how our YouTube thumbnail SEO score checker works — from upload to a full thumbnail check covering readability, contrast, focal point, ratio, and mobile vs. web scoring.";
 
 const steps = [
   {
@@ -60,11 +60,11 @@ const factors = [
     <p class="text-sm leading-relaxed text-ink/65 dark:text-smoke sm:text-base">
       Most thumbnail advice online boils down to vague suggestions like "make it pop" or "use
       bright colors," without explaining what those phrases actually mean in measurable terms. We
-      wanted our analyzer to be different: every score it produces should be traceable back to a
-      specific, explainable factor, so you understand exactly why a thumbnail scored the way it
-      did and what to change first. The five-step process below is the same one that runs every
-      time you drop an image into the tool on our homepage, whether you're checking a single
-      thumbnail or comparing a handful of variants before choosing one to publish.
+      wanted our SEO score checker to be different: every score it produces should be traceable
+      back to a specific, explainable factor, so you understand exactly why a thumbnail scored the
+      way it did and what to change first. The five-step process below is what runs every time you
+      check your YouTube thumbnail on our homepage, whether you're reviewing a single image or
+      comparing a handful of variants before choosing one to publish.
     </p>
   </section>
 
@@ -72,7 +72,7 @@ const factors = [
     <div class="space-y-10">
       {steps.map((s) => (
         <div class="flex gap-6">
-          <p class="font-mono-num shrink-0 text-3xl font-bold text-red/30">{s.n}</p>
+          <p class="font-mono-num shrink-0 text-3xl font-bold text-red/30" aria-hidden="true">{s.n}</p>
           <div>
             <h2 class="font-display text-lg font-bold text-ink dark:text-fog">{s.title}</h2>
             <p class="mt-2 text-sm leading-relaxed text-ink/60 dark:text-smoke">{s.body}</p>
@@ -84,13 +84,13 @@ const factors = [
 
   <section class="border-y border-ink/10 dark:border-seam bg-paper-dim dark:bg-night-dim py-20">
     <div class="mx-auto max-w-4xl px-5">
-      <p class="font-mono-num text-xs uppercase tracking-[0.25em] text-red">Scoring Weights</p>
+      <p class="font-mono-num text-xs uppercase tracking-[0.25em] text-red-dark dark:text-red">Scoring Weights</p>
       <h2 class="mt-3 font-display text-3xl font-bold text-ink dark:text-fog sm:text-4xl">What We Analyze &amp; Why It's Weighted That Way</h2>
       <div class="mt-10 overflow-hidden rounded-sm border border-line dark:border-seam bg-card dark:bg-charcoal">
         {factors.map((f, i) => (
           <div class:list={["flex flex-col gap-1 px-6 py-5 sm:flex-row sm:items-center sm:gap-6", i !== 0 && "border-t border-ink/10 dark:border-seam"]}>
             <div class="flex items-center gap-3 sm:w-48 sm:shrink-0">
-              <span class="font-mono-num text-sm font-bold text-red">{f.weight}</span>
+              <span class="font-mono-num text-sm font-bold text-red-dark dark:text-red">{f.weight}</span>
               <span class="font-display text-sm font-semibold text-ink dark:text-fog">{f.name}</span>
             </div>
             <p class="text-sm text-ink/60 dark:text-smoke">{f.detail}</p>
@@ -100,13 +100,13 @@ const factors = [
       <p class="mt-6 text-xs text-ink/40 dark:text-smoke">
         Weights reflect general design and readability best practices for small preview images. They're a
         guide for improving your design, not a guarantee of YouTube performance — see our
-        <a href="/disclaimer/" class="text-red underline underline-offset-2">disclaimer</a> for details.
+        <a href="/disclaimer/" class="text-red-dark dark:text-red underline underline-offset-2">disclaimer</a> for details.
       </p>
     </div>
   </section>
 
   <section class="mx-auto max-w-3xl px-5 py-20">
-    <p class="font-mono-num text-xs uppercase tracking-[0.25em] text-red">Mobile vs. Web</p>
+    <p class="font-mono-num text-xs uppercase tracking-[0.25em] text-red-dark dark:text-red">Mobile vs. Web</p>
     <h2 class="mt-3 font-display text-3xl font-bold text-ink dark:text-fog sm:text-4xl">Why We Score Mobile and Web Separately</h2>
     <p class="mt-5 text-sm leading-relaxed text-ink/65 dark:text-smoke sm:text-base">
       A thumbnail rarely looks the same twice. On a phone, it might appear at roughly 120 by 68
@@ -130,7 +130,7 @@ const factors = [
 
   <section class="border-t border-line dark:border-seam bg-paper-dim dark:bg-night-dim py-20">
     <div class="mx-auto max-w-3xl px-5">
-      <p class="font-mono-num text-xs uppercase tracking-[0.25em] text-red">Practical Tips</p>
+      <p class="font-mono-num text-xs uppercase tracking-[0.25em] text-red-dark dark:text-red">Practical Tips</p>
       <h2 class="mt-3 font-display text-3xl font-bold text-ink dark:text-fog sm:text-4xl">Quick Wins Before You Re-Analyze</h2>
       <ul class="mt-6 space-y-4 text-sm leading-relaxed text-ink/65 dark:text-smoke sm:text-base">
         <li><strong class="text-ink dark:text-fog">Zoom out to phone size first.</strong> Shrink your thumbnail preview down to roughly the size of a postage stamp. If you can't tell what it's about in under two seconds, a viewer scrolling their feed won't either.</li>
@@ -145,7 +145,7 @@ const factors = [
   <section class="mx-auto max-w-2xl px-5 py-20 text-center">
     <h2 class="font-display text-2xl font-bold text-ink dark:text-fog sm:text-3xl">Try It on Your Own Thumbnail</h2>
     <p class="mt-3 text-ink/60 dark:text-smoke">See your mobile and web scores in seconds.</p>
-    <a href="/#analyzer" class="mt-6 inline-block rounded-sm bg-red px-6 py-3 text-sm font-semibold text-white hover:bg-red-dark">
+    <a href="/#analyzer" class="mt-6 inline-block rounded-sm bg-red-dark px-6 py-3 text-sm font-semibold text-white hover:bg-red-darker">
       Analyze My Thumbnail
     </a>
   </section>

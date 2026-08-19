@@ -4,14 +4,19 @@ import AnalyzerTool from "../components/AnalyzerTool.astro";
 import FaqAccordion from "../components/FaqAccordion.astro";
 import { faqs } from "../data/faqs";
 
-const title = "YouTube Thumbnail Analyzer & Checker — Free Thumbnail Score Tool | VT Analyzer";
+const title = "Check YouTube Thumbnail — Free Thumbnail Checker & Analyzer | VT Analyzer";
 const description =
-  "Free YouTube thumbnail analyzer and checker. Upload any thumbnail to get an instant thumbnail score, mobile vs. web preview, and thumbnail SEO tips to boost your click-through rate.";
+  "Check your YouTube thumbnail instantly with a free thumbnail checker and analyzer. Score size, ratio, and readability, preview mobile vs. web, and boost your click-through rate.";
 
 const homeFaqs = faqs.filter((f) =>
-  ["What is a YouTube thumbnail?", "Is YouTube thumbnail size 1280x720 or 1920x1080?", "What is a thumbnail checker or thumbnail analyzer?", "Where can I test my thumbnails?"].includes(
-    f.question
-  )
+  [
+    "What is a YouTube thumbnail?",
+    "Is YouTube thumbnail size 1280x720 or 1920x1080?",
+    "What are YouTube thumbnail measurements in pixels?",
+    "What is the YouTube thumbnail aspect ratio?",
+    "What is a thumbnail checker or thumbnail analyzer?",
+    "Where can I test my thumbnails?",
+  ].includes(f.question)
 );
 
 const jsonLd = [
@@ -19,7 +24,7 @@ const jsonLd = [
     "@context": "https://schema.org",
     "@type": "WebApplication",
     name: "VT Analyzer — YouTube Thumbnail Analyzer",
-    url: "https://www.vtanalyzer.site/",
+    url: "https://vtanalyzer.site/",
     applicationCategory: "DesignApplication",
     operatingSystem: "Any (Web-based)",
     description,
@@ -38,10 +43,10 @@ const jsonLd = [
     "@context": "https://schema.org",
     "@type": "WebSite",
     name: "VT Analyzer",
-    url: "https://www.vtanalyzer.site/",
+    url: "https://vtanalyzer.site/",
     potentialAction: {
       "@type": "SearchAction",
-      target: "https://www.vtanalyzer.site/faq/?q={search_term_string}",
+      target: "https://vtanalyzer.site/faq/?q={search_term_string}",
       "query-input": "required name=search_term_string",
     },
   },
@@ -56,7 +61,7 @@ const features = [
   {
     icon: "M9 8L15 12L9 16V8Z",
     title: "Thumbnail SEO Score",
-    desc: "Get a data-backed thumbnail score built from contrast, focal point, saturation, and readability — the signals tied to click-through rate.",
+    desc: "Get a data-backed thumbnail score — like an SEO score checker for YouTube — built from contrast, focal point, saturation, and readability, the signals tied to click-through rate.",
   },
   {
     icon: "M3 3V21H21",
@@ -97,7 +102,7 @@ const stats = [
           clicks or scrolls past.
         </p>
         <div class="mt-8 flex flex-wrap gap-3">
-          <a href="#analyzer" class="rounded-sm bg-red px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-red-dark">
+          <a href="#analyzer" class="rounded-sm bg-red-dark px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-red-darker">
             Analyze My Thumbnail
           </a>
           <a href="/how-it-works/" class="rounded-sm border border-white/20 px-6 py-3 text-sm font-semibold text-mist transition-colors hover:border-white/40">
@@ -139,7 +144,7 @@ const stats = [
   <!-- Features -->
   <section id="features" class="mx-auto max-w-6xl px-5 py-20">
     <div class="mx-auto max-w-2xl text-center">
-      <p class="font-mono-num text-xs uppercase tracking-[0.25em] text-red">Why Creators Use It</p>
+      <p class="font-mono-num text-xs uppercase tracking-[0.25em] text-red-dark dark:text-red">Why Creators Use It</p>
       <h2 class="mt-3 font-display text-3xl font-bold text-ink dark:text-fog sm:text-4xl">
         A Thumbnail Score Checker Built for YouTube, Not Generic Design
       </h2>
@@ -166,16 +171,17 @@ const stats = [
   <!-- Keyword-rich informational section -->
   <section class="border-y border-ink/10 dark:border-seam bg-paper-dim dark:bg-night-dim">
     <div class="mx-auto max-w-4xl px-5 py-20">
-      <p class="font-mono-num text-xs uppercase tracking-[0.25em] text-red">Thumbnail SEO 101</p>
+      <p class="font-mono-num text-xs uppercase tracking-[0.25em] text-red-dark dark:text-red">Thumbnail SEO 101</p>
       <h2 class="mt-3 font-display text-3xl font-bold text-ink dark:text-fog sm:text-4xl">
         What Actually Makes a YouTube Thumbnail Work
       </h2>
       <div class="prose-custom mt-6 space-y-5 text-ink/70 dark:text-smoke">
         <p>
           A YouTube thumbnail's only job is to earn the click without misrepresenting the video.
-          YouTube's <a href="/faq/#is-youtube-thumbnail-size-1280x720-or-1920x1080" class="text-red underline underline-offset-2">recommended thumbnail size is 1280×720 pixels</a>
-          at a 16:9 aspect ratio, under a 2MB file limit — get that wrong and YouTube crops or
-          stretches your image automatically, distorting text and faces.
+          YouTube's <a href="/faq/#is-youtube-thumbnail-size-1280x720-or-1920x1080" class="text-red-dark dark:text-red underline underline-offset-2">recommended thumbnail size is 1280×720 pixels</a>
+          at a <a href="/faq/#what-is-the-youtube-thumbnail-aspect-ratio" class="text-red-dark dark:text-red underline underline-offset-2">16:9 aspect ratio</a>,
+          under a 2MB file limit — get those measurements or that resolution wrong and YouTube
+          crops, stretches, or scales your image automatically, distorting text and faces.
         </p>
         <p>
           Beyond specs, the thumbnails that consistently win attention share a small set of traits:
@@ -186,10 +192,10 @@ const stats = [
           don't change.
         </p>
         <p>
-          That's what a thumbnail analyzer measures. Instead of relying on gut feel, our thumbnail
-          checker scores the image against the readability, contrast, and composition signals most
-          closely tied to click-through rate, then shows you exactly how it looks on mobile versus
-          desktop before you publish.
+          That's what a thumbnail analyzer measures. Instead of relying on gut feel, use our free
+          tool to check your YouTube thumbnail's ratio, contrast, and composition against the
+          signals most closely tied to click-through rate, then see exactly how it looks on mobile
+          versus desktop before you publish.
         </p>
       </div>
       <a href="/how-it-works/" class="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-red hover:text-red-dark">
@@ -203,10 +209,10 @@ const stats = [
   <section class="mx-auto max-w-4xl px-5 py-20">
     <div class="flex flex-wrap items-end justify-between gap-4">
       <div>
-        <p class="font-mono-num text-xs uppercase tracking-[0.25em] text-red">Quick Answers</p>
+        <p class="font-mono-num text-xs uppercase tracking-[0.25em] text-red-dark dark:text-red">Quick Answers</p>
         <h2 class="mt-3 font-display text-3xl font-bold text-ink dark:text-fog sm:text-4xl">Frequently Asked Questions</h2>
       </div>
-      <a href="/faq/" class="text-sm font-semibold text-red hover:text-red-dark">View all FAQs &rarr;</a>
+      <a href="/faq/" class="text-sm font-semibold text-red-dark dark:text-red hover:text-red-darker dark:hover:text-red-light">View all FAQs &rarr;</a>
     </div>
     <div class="mt-8">
       <FaqAccordion items={homeFaqs} />
@@ -220,7 +226,7 @@ const stats = [
       <p class="mt-4 text-mist/60">
         It takes ten seconds and your image never leaves your browser.
       </p>
-      <a href="#analyzer" class="mt-8 inline-block rounded-sm bg-red px-8 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-red-dark">
+      <a href="#analyzer" class="mt-8 inline-block rounded-sm bg-red-dark px-8 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-red-darker">
         Analyze Your Thumbnail Now
       </a>
     </div>

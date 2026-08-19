@@ -1,0 +1,19 @@
+# VT Analyzer
+
+> VT Analyzer is a free YouTube thumbnail analyzer and checker. Upload or paste a thumbnail image and it scores readability, contrast, focal point, color saturation, and aspect ratio/resolution against YouTube's display specs, then shows separate mobile and web previews with specific, actionable suggestions to improve click-through rate.
+
+All analysis runs client-side in the browser (HTML5 Canvas API) — no image is uploaded to a server, no signup is required, and the tool is free to use.
+
+## Core Tool
+- [Thumbnail Analyzer](https://vtanalyzer.site/): Upload a YouTube thumbnail to get an instant score, mobile vs. web preview, and improvement suggestions.
+- [How It Works](https://vtanalyzer.site/how-it-works/): The exact five-step scoring process and the weighting of each factor (readability, contrast, focal point, saturation, brightness, aspect ratio, resolution, file size).
+
+## Reference
+- [FAQ](https://vtanalyzer.site/faq/): Answers on YouTube thumbnail size, dimensions, aspect ratio, resolution, file formats, thumbnail makers (Canva, ChatGPT), and YouTube's thumbnail rules.
+- [About](https://vtanalyzer.site/about/): Who built VT Analyzer, the scoring approach, and who the tool is for.
+
+## Policies
+- [Privacy Policy](https://vtanalyzer.site/privacy-policy/)
+- [Terms of Service](https://vtanalyzer.site/terms-of-service/)
+- [Disclaimer](https://vtanalyzer.site/disclaimer/): Limitations of the thumbnail scores — a design/readability signal, not a guarantee of YouTube performance.
+- [Contact](https://vtanalyzer.site/contact/)

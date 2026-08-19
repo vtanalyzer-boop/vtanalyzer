@@ -5,7 +5,7 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://www.vtanalyzer.site',
+  site: 'https://vtanalyzer.site',
   output: 'static',
   integrations: [sitemap()],
   build: {
