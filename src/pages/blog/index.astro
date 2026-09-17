@@ -1,0 +1,50 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { blogPosts } from "../../data/blogPosts";
+
+const title = "Blog — YouTube Thumbnail Guides & Tips | VT Analyzer";
+const description =
+  "Guides on making, sizing, and testing YouTube thumbnails — practical, step-by-step advice to help your videos earn more clicks.";
+
+const sortedPosts = [...blogPosts].sort(
+  (a, b) => new Date(b.publishDate).getTime() - new Date(a.publishDate).getTime()
+);
+
+function formatDate(iso: string) {
+  return new Date(iso).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" });
+}
+---
+
+<Layout title={title} description={description} path="/blog/">
+  <section class="bg-void py-16 text-mist sm:py-20">
+    <div class="mx-auto max-w-3xl px-5 text-center">
+      <p class="font-mono-num text-xs uppercase tracking-[0.25em] text-red">Blog</p>
+      <h1 class="mt-3 font-display text-4xl font-bold sm:text-5xl">YouTube Thumbnail Guides</h1>
+      <p class="mt-4 text-sm leading-relaxed text-mist/70 sm:text-base">
+        Practical, step-by-step guides on making, sizing, and testing YouTube thumbnails — no vague
+        "make it pop" advice.
+      </p>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-3xl px-5 py-16">
+    <ul class="divide-y divide-ink/10 dark:divide-seam">
+      {sortedPosts.map((post) => (
+        <li class="py-8 first:pt-0">
+          <a href={`/blog/${post.slug}/`} class="group block">
+            <p class="text-xs text-ink/40 dark:text-smoke">
+              <time datetime={post.publishDate}>{formatDate(post.publishDate)}</time>
+              <span aria-hidden="true"> &middot; </span>
+              {post.readTime}
+            </p>
+            <h2 class="mt-2 font-display text-xl font-bold text-ink dark:text-fog group-hover:text-red-dark dark:group-hover:text-red sm:text-2xl">
+              {post.title}
+            </h2>
+            <p class="mt-2 text-sm leading-relaxed text-ink/65 dark:text-smoke sm:text-base">{post.excerpt}</p>
+            <span class="mt-3 inline-block text-sm font-semibold text-red-dark dark:text-red">Read guide &rarr;</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </section>
+</Layout>

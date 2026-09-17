@@ -1,0 +1,177 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import { blogPosts } from "../../../data/blogPosts";
+
+const post = blogPosts.find((p) => p.slug === "how-to-make-a-youtube-thumbnail")!;
+
+const microFaqs = [
+  {
+    q: "How do you make a thumbnail for YouTube?",
+    a: "Pick a still frame or a purpose-shot photo that shows the video's subject clearly, open it in a design tool sized to 1280×720, add a short high-contrast headline (three to five words), and export as a JPG or PNG under 2MB. That's the whole process — everything else is refinement.",
+  },
+  {
+    q: "How do I make a YouTube thumbnail with no design experience?",
+    a: "Use a template-based tool like Canva instead of a blank canvas. Search their library for \"YouTube thumbnail,\" pick a layout close to what you want, and swap in your own photo and text. You're editing an already-balanced design rather than building one from scratch.",
+  },
+  {
+    q: "How do you make a YouTube thumbnail on your phone?",
+    a: "Canva, PicsArt, and Adobe Express all have mobile apps with YouTube-thumbnail-sized templates built in. Import a photo from your camera roll, drop it into a template, edit the text, and export — the whole workflow is designed for a phone screen, no desktop needed.",
+  },
+  {
+    q: "How do I make a thumbnail from a frame in my own video?",
+    a: "Scrub to a clear, well-lit moment in your video and export that frame as a still image (most editors — CapCut, Premiere, DaVinci Resolve — have an \"export frame\" or \"snapshot\" option). Bring that still into a design tool and layer text and a border on top rather than uploading it plain.",
+  },
+  {
+    q: "How do you make thumbnails for YouTube quickly, for every video?",
+    a: "Build one template once — background style, text placement, font, and a consistent accent color — then duplicate it per video and swap the photo and headline. Creators who post often almost always work from a saved template rather than designing from zero each time.",
+  },
+  {
+    q: "How to do a thumbnail on YouTube without Photoshop?",
+    a: "You don't need Photoshop. Canva, Adobe Express, and Fotor all offer free tiers built specifically for social and thumbnail sizes, with layers, text, and stock photos included. Photoshop is useful for advanced compositing, not required for a solid thumbnail.",
+  },
+  {
+    q: "How to do thumbnails for YouTube that actually get clicks?",
+    a: "Design for how it looks small, not how it looks full-size. Zoom your draft out to roughly 120px wide (about how it appears in search and suggested videos) — if the subject and text are still readable at that size, it'll hold up in the feed.",
+  },
+];
+
+const jsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: post.title,
+    description: post.description,
+    datePublished: post.publishDate,
+    dateModified: post.publishDate,
+    author: { "@type": "Organization", name: "VT Analyzer" },
+    publisher: { "@type": "Organization", name: "VT Analyzer" },
+    mainEntityOfPage: `https://vtanalyzer.site/blog/${post.slug}/`,
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: microFaqs.map((f) => ({
+      "@type": "Question",
+      name: f.q,
+      acceptedAnswer: { "@type": "Answer", text: f.a },
+    })),
+  },
+];
+---
+
+<Layout title={post.title} description={post.description} path={`/blog/${post.slug}/`} jsonLd={jsonLd}>
+  <article>
+    <section class="bg-void py-16 text-mist sm:py-20">
+      <div class="mx-auto max-w-3xl px-5">
+        <p class="font-mono-num text-xs uppercase tracking-[0.25em] text-red">
+          <a href="/blog/" class="hover:underline">Blog</a>
+        </p>
+        <h1 class="mt-3 font-display text-3xl font-bold sm:text-4xl">{post.title}</h1>
+        <p class="mt-4 text-sm text-mist/60">
+          <time datetime={post.publishDate}>
+            {new Date(post.publishDate).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}
+          </time>
+          <span aria-hidden="true"> &middot; </span>
+          {post.readTime}
+        </p>
+      </div>
+    </section>
+
+    <section class="mx-auto max-w-3xl space-y-10 px-5 py-16 text-sm leading-relaxed text-ink/70 dark:text-smoke sm:text-base">
+      <p>
+        Most guides on this topic jump straight to design tips and skip the basics. This one starts
+        at the beginning: what size a YouTube thumbnail needs to be, then every practical way to
+        actually make one — desktop, phone, template-based, or from-scratch — followed by the habits
+        that separate a thumbnail people click from one they scroll past.
+      </p>
+
+      <div>
+        <h2 class="font-display text-2xl font-bold text-ink dark:text-fog">What Is the YouTube Thumbnail Size?</h2>
+        <p class="mt-4">
+          YouTube's recommended thumbnail size is <strong>1280×720 pixels</strong>, at a 16:9 aspect
+          ratio, with a 2MB file size cap and a 640-pixel-wide minimum. Design at 1280×720 directly —
+          uploading something in a different ratio (a square Instagram export, a 4:3 photo) means
+          YouTube auto-crops it to fit, which regularly cuts off faces or text near the edges. For the
+          full breakdown of measurements, resolution, and aspect ratio,
+          <a href="/faq/#what-are-youtube-thumbnail-measurements-in-pixels" class="text-red-dark dark:text-red underline underline-offset-2">
+            see the complete answer in our FAQ
+          </a>.
+        </p>
+      </div>
+
+      <div>
+        <h2 class="font-display text-2xl font-bold text-ink dark:text-fog">How to Make a YouTube Thumbnail: Step by Step</h2>
+        <ol class="mt-4 list-decimal space-y-4 pl-5">
+          <li>
+            <strong class="text-ink dark:text-fog">Start with a subject, not a blank canvas.</strong> Either
+            a still frame pulled from your video or a photo shot specifically for the thumbnail. A
+            clear face with a visible expression, or the actual object/result the video is about,
+            almost always outperforms an abstract graphic.
+          </li>
+          <li>
+            <strong class="text-ink dark:text-fog">Set your canvas to 1280×720.</strong> Every major
+            tool — Canva, Photoshop, Adobe Express, Fotor — has a "YouTube Thumbnail" preset that
+            does this for you.
+          </li>
+          <li>
+            <strong class="text-ink dark:text-fog">Add three to five words of text, maximum.</strong>
+            A thumbnail is read in under a second at a small size — a full sentence won't get read at
+            all. Use a bold, heavy-weight font and a color that contrasts hard against the background
+            behind it.
+          </li>
+          <li>
+            <strong class="text-ink dark:text-fog">Push contrast and keep one clear focal point.</strong>
+            Separate your subject from the background with a border, a color shift, or a slight
+            drop shadow, and resist the urge to fill every corner — one clear thing to look at beats
+            a busy frame.
+          </li>
+          <li>
+            <strong class="text-ink dark:text-fog">Export at under 2MB as JPG or PNG.</strong> Then
+            check it small before you publish — zoom out until it's roughly the size it'll actually
+            appear at in search results and suggested videos.
+          </li>
+        </ol>
+      </div>
+
+      <div>
+        <h2 class="font-display text-2xl font-bold text-ink dark:text-fog">Tools People Actually Use</h2>
+        <p class="mt-4">
+          <strong class="text-ink dark:text-fog">Canva</strong> is the most common starting point —
+          free, template-driven, and available on both desktop and mobile, which covers most of the
+          "how do I make one without design experience" question on its own.
+          <strong class="text-ink dark:text-fog">Adobe Express</strong> is a close second, with a
+          similar template library. For anyone comfortable with layers and manual editing,
+          <strong class="text-ink dark:text-fog">Photoshop</strong> or the free
+          <strong class="text-ink dark:text-fog">GIMP</strong> give full control but a steeper
+          learning curve. And for a frame straight from the video itself, your video editor's
+          "export frame" or "snapshot" tool — CapCut, Premiere, and DaVinci Resolve all have one — is
+          the fastest path from footage to a base image.
+        </p>
+      </div>
+
+      <div>
+        <h2 class="font-display text-2xl font-bold text-ink dark:text-fog">Check It Before You Publish</h2>
+        <p class="mt-4">
+          Once you've exported a thumbnail, run it through a checker before it goes live. Our
+          <a href="/" class="text-red-dark dark:text-red underline underline-offset-2">free thumbnail analyzer</a>
+          scores contrast, readability, and focal point, and shows you a mobile vs. web preview side
+          by side — the same two contexts a thumbnail actually gets seen in. For a breakdown of
+          exactly what it measures and why, see
+          <a href="/how-it-works/" class="text-red-dark dark:text-red underline underline-offset-2">how the scoring works</a>.
+        </p>
+      </div>
+
+      <div>
+        <h2 class="font-display text-2xl font-bold text-ink dark:text-fog">Common Questions About Making a Thumbnail</h2>
+        <div class="mt-4 divide-y divide-ink/10 dark:divide-seam">
+          {microFaqs.map((f) => (
+            <div class="py-5 first:pt-0">
+              <h3 class="font-display text-base font-semibold text-ink dark:text-fog">{f.q}</h3>
+              <p class="mt-2">{f.a}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  </article>
+</Layout>

@@ -12,6 +12,10 @@ All analysis runs client-side in the browser (HTML5 Canvas API) — no image is 
 - [FAQ](https://vtanalyzer.site/faq/): Answers on YouTube thumbnail size, dimensions, aspect ratio, resolution, file formats, thumbnail makers (Canva, ChatGPT), and YouTube's thumbnail rules.
 - [About](https://vtanalyzer.site/about/): Who built VT Analyzer, the scoring approach, and who the tool is for.
 
+## Blog
+- [Blog Index](https://vtanalyzer.site/blog/): Guides on making, sizing, and testing YouTube thumbnails.
+- [How to Make a YouTube Thumbnail](https://vtanalyzer.site/blog/how-to-make-a-youtube-thumbnail/): Complete guide covering thumbnail size, step-by-step creation, free tools (Canva, Photoshop, mobile apps), and common questions.
+
 ## Policies
 - [Privacy Policy](https://vtanalyzer.site/privacy-policy/)
 - [Terms of Service](https://vtanalyzer.site/terms-of-service/)
