@@ -1,5 +1,5 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://vtanalyzer.site/sitemap-index.xml
+
 Sitemap: https://vtanalyzer.site/sitemap.xml
