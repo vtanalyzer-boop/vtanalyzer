@@ -18,4 +18,14 @@ export const blogPosts: BlogPost[] = [
     publishDate: "2026-08-20",
     readTime: "9 min read",
   },
+  {
+    slug: "how-to-download-a-youtube-thumbnail",
+    title: "How to Download a YouTube Thumbnail (Any Resolution, Free)",
+    description:
+      "How to download a YouTube thumbnail in HD or the highest resolution available, by link or video ID, on desktop or mobile — plus what to do when you want an Instagram thumbnail instead.",
+    excerpt:
+      "The direct-link method for pulling any YouTube thumbnail at its highest available resolution, a quick resolution guide, and why Instagram thumbnails need a different approach entirely.",
+    publishDate: "2026-08-22",
+    readTime: "7 min read",
+  },
 ];

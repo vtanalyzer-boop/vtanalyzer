@@ -15,6 +15,7 @@ All analysis runs client-side in the browser (HTML5 Canvas API) — no image is 
 ## Blog
 - [Blog Index](https://vtanalyzer.site/blog/): Guides on making, sizing, and testing YouTube thumbnails.
 - [How to Make a YouTube Thumbnail](https://vtanalyzer.site/blog/how-to-make-a-youtube-thumbnail/): Complete guide covering thumbnail size, step-by-step creation, free tools (Canva, Photoshop, mobile apps), and common questions.
+- [How to Download a YouTube Thumbnail](https://vtanalyzer.site/blog/how-to-download-a-youtube-thumbnail/): The direct-link method for downloading any YouTube thumbnail at its highest resolution, a full resolution reference table, and why Instagram thumbnails require a different approach.
 
 ## Policies
 - [Privacy Policy](https://vtanalyzer.site/privacy-policy/)

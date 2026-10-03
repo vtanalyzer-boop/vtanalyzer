@@ -1,0 +1,177 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import { blogPosts } from "../../../data/blogPosts";
+
+const post = blogPosts.find((p) => p.slug === "how-to-download-a-youtube-thumbnail")!;
+
+const resolutions = [
+  { file: "maxresdefault.jpg", size: "1280×720 (highest available)", note: "Not every video has this file — see the note below." },
+  { file: "sddefault.jpg", size: "640×480", note: "Reliable fallback when maxres isn't available." },
+  { file: "hqdefault.jpg", size: "480×360", note: "Almost always available, on every video." },
+  { file: "mqdefault.jpg", size: "320×180", note: "Medium quality, small file size." },
+  { file: "default.jpg", size: "120×90", note: "The tiny preview size, rarely useful." },
+];
+
+const microFaqs = [
+  {
+    q: "How do I download a YouTube thumbnail by link?",
+    a: "Paste the video's URL into anything that extracts the video ID — or just read it yourself (it's the string after \"v=\" or after \"youtu.be/\") — then open https://img.youtube.com/vi/VIDEO_ID/maxresdefault.jpg in a new tab and save the image from there.",
+  },
+  {
+    q: "Can I download a YouTube thumbnail in 4K?",
+    a: "Not truly. YouTube doesn't generate 3840×2160 thumbnail files — \"maxresdefault\" (1280×720) is the highest resolution YouTube actually produces, regardless of how high-resolution the source video is. Any tool claiming a genuine 4K thumbnail download is upscaling the 720p original, not retrieving a higher-quality source.",
+  },
+  {
+    q: "Why does maxresdefault.jpg sometimes not load?",
+    a: "YouTube only generates a maxresdefault file for videos uploaded in HD. If it 404s, step down to sddefault.jpg or hqdefault.jpg — one of those exists for essentially every video on the platform.",
+  },
+  {
+    q: "Can I download someone else's Instagram thumbnail the same way?",
+    a: "No — Instagram doesn't expose a predictable public thumbnail URL the way YouTube does. Its image URLs are signed and expire, so there's no equivalent link trick. See the Instagram section below for what actually works.",
+  },
+];
+
+const jsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: post.title,
+    description: post.description,
+    datePublished: post.publishDate,
+    dateModified: post.publishDate,
+    author: { "@type": "Organization", name: "VT Analyzer" },
+    publisher: { "@type": "Organization", name: "VT Analyzer" },
+    mainEntityOfPage: `https://vtanalyzer.site/blog/${post.slug}/`,
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: microFaqs.map((f) => ({
+      "@type": "Question",
+      name: f.q,
+      acceptedAnswer: { "@type": "Answer", text: f.a },
+    })),
+  },
+];
+---
+
+<Layout title={post.title} description={post.description} path={`/blog/${post.slug}/`} jsonLd={jsonLd}>
+  <article>
+    <section class="bg-void py-16 text-mist sm:py-20">
+      <div class="mx-auto max-w-3xl px-5">
+        <p class="font-mono-num text-xs uppercase tracking-[0.25em] text-red">
+          <a href="/blog/" class="hover:underline">Blog</a>
+        </p>
+        <h1 class="mt-3 font-display text-3xl font-bold sm:text-4xl">{post.title}</h1>
+        <p class="mt-4 text-sm text-mist/60">
+          <time datetime={post.publishDate}>
+            {new Date(post.publishDate).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}
+          </time>
+          <span aria-hidden="true"> &middot; </span>
+          {post.readTime}
+        </p>
+      </div>
+    </section>
+
+    <section class="mx-auto max-w-3xl space-y-10 px-5 py-16 text-sm leading-relaxed text-ink/70 dark:text-smoke sm:text-base">
+      <p>
+        Most people looking to download a YouTube thumbnail want it for one of a few reasons: pulling
+        up a frame for reference while designing their own, archiving a thumbnail from their own
+        channel, or studying what a high-performing video in their niche is doing visually. YouTube
+        actually makes this easy — every thumbnail is sitting at a predictable, public URL. No
+        extension or third-party site is required.
+      </p>
+
+      <div>
+        <h2 class="font-display text-2xl font-bold text-ink dark:text-fog">The Direct-Link Method</h2>
+        <p class="mt-4">
+          Every YouTube video serves its thumbnail at
+          <code class="rounded bg-ink/5 px-1.5 py-0.5 text-[0.85em] dark:bg-white/10">https://img.youtube.com/vi/VIDEO_ID/maxresdefault.jpg</code>.
+          Find the video ID in the URL — it's the part after <code class="rounded bg-ink/5 px-1.5 py-0.5 text-[0.85em] dark:bg-white/10">watch?v=</code> on
+          a standard link, the part right after <code class="rounded bg-ink/5 px-1.5 py-0.5 text-[0.85em] dark:bg-white/10">youtu.be/</code> on
+          a shortened link, or after <code class="rounded bg-ink/5 px-1.5 py-0.5 text-[0.85em] dark:bg-white/10">shorts/</code> for
+          a Short. Drop that ID into the URL pattern above, open it in a new tab, then right-click
+          and save the image — on mobile, a long-press on the image does the same thing.
+        </p>
+      </div>
+
+      <div>
+        <h2 class="font-display text-2xl font-bold text-ink dark:text-fog">Every Resolution YouTube Offers</h2>
+        <p class="mt-4">
+          Swap <code class="rounded bg-ink/5 px-1.5 py-0.5 text-[0.85em] dark:bg-white/10">maxresdefault.jpg</code> in
+          the URL above for any of these filenames to get a different size:
+        </p>
+        <div class="mt-4 overflow-x-auto rounded-sm border border-line dark:border-seam">
+          <table class="w-full text-left text-sm">
+            <thead class="bg-paper-dim dark:bg-night-dim">
+              <tr>
+                <th class="px-4 py-2.5 font-display font-semibold text-ink dark:text-fog">Filename</th>
+                <th class="px-4 py-2.5 font-display font-semibold text-ink dark:text-fog">Size</th>
+                <th class="px-4 py-2.5 font-display font-semibold text-ink dark:text-fog">Note</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-ink/10 dark:divide-seam">
+              {resolutions.map((r) => (
+                <tr>
+                  <td class="px-4 py-2.5 font-mono-num text-xs">{r.file}</td>
+                  <td class="px-4 py-2.5">{r.size}</td>
+                  <td class="px-4 py-2.5 text-ink/60 dark:text-smoke">{r.note}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p class="mt-4">
+          A quick honesty check on "4K": YouTube doesn't generate a true 3840×2160 thumbnail file for
+          any video. <code class="rounded bg-ink/5 px-1.5 py-0.5 text-[0.85em] dark:bg-white/10">maxresdefault.jpg</code> at
+          1280×720 is the highest resolution that actually exists on YouTube's servers — anything
+          claiming to deliver more is stretching that same 720p image, not retrieving a sharper
+          original.
+        </p>
+      </div>
+
+      <div>
+        <h2 class="font-display text-2xl font-bold text-ink dark:text-fog">What About Instagram Thumbnails?</h2>
+        <p class="mt-4">
+          Instagram doesn't work the same way. Its image and video URLs are signed and expire, so
+          there's no stable, public link pattern you can build the way you can with YouTube. The
+          practical options for an Instagram Reel or video cover are: open the post and take a
+          screenshot of the cover frame, use Instagram's own download option if it's your own content
+          (available through Meta Business Suite for professional accounts), or save the video and
+          pull a still frame from it in a video editor. Be cautious of third-party "Instagram
+          thumbnail downloader" sites — many request your Instagram login or violate Instagram's
+          terms of service, which isn't worth the risk for grabbing a single image.
+        </p>
+      </div>
+
+      <div>
+        <h2 class="font-display text-2xl font-bold text-ink dark:text-fog">Before You Reuse What You Download</h2>
+        <p class="mt-4">
+          Downloading your own channel's thumbnail is obviously fine — it's your image. Downloading
+          someone else's for personal reference, research, or critique is generally reasonable too.
+          What isn't fine is republishing another creator's thumbnail as your own or using it
+          commercially without permission — it's still their copyrighted work. If you've pulled down
+          a thumbnail to study why it works, run it through our
+          <a href="/" class="text-red-dark dark:text-red underline underline-offset-2">free thumbnail analyzer</a>
+          to see exactly what's driving its contrast, readability, and focal point — and when you're
+          ready to build your own version, our
+          <a href="/blog/how-to-make-a-youtube-thumbnail/" class="text-red-dark dark:text-red underline underline-offset-2">
+            guide to making a YouTube thumbnail
+          </a> walks through the whole process.
+        </p>
+      </div>
+
+      <div>
+        <h2 class="font-display text-2xl font-bold text-ink dark:text-fog">Quick Questions</h2>
+        <div class="mt-4 divide-y divide-ink/10 dark:divide-seam">
+          {microFaqs.map((f) => (
+            <div class="py-5 first:pt-0">
+              <h3 class="font-display text-base font-semibold text-ink dark:text-fog">{f.q}</h3>
+              <p class="mt-2">{f.a}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  </article>
+</Layout>
