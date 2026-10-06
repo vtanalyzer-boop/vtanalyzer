@@ -17,9 +17,13 @@ import "@fontsource/inter/latin-400.css";
 import "@fontsource/inter/latin-500.css";
 import "@fontsource/inter/latin-600.css";
 import "@fontsource/inter/latin-700.css";
-import "@fontsource/inter/latin-800.css";
 import "@fontsource/jetbrains-mono/latin-500.css";
 import "@fontsource/jetbrains-mono/latin-700.css";
+// NOTE: fonts are deliberately NOT <link rel="preload">ed. Measured with
+// Lighthouse (mobile, Slow 4G): preloading the hero fonts pushed FCP from
+// ~0.8s to ~1.7s, because the preloads compete with the HTML for bandwidth.
+// Inline CSS (astro.config.mjs) already shortens the font discovery chain.
+// Inter 800 is not imported — no `font-extrabold` is used anywhere.
 
 export interface Props {
   title: string;
@@ -69,94 +73,137 @@ const { title, description, path, ogImage, noindex, jsonLd } = Astro.props;
          custom language switcher in the header (no default widget UI shown). -->
     <div id="google_translate_element" class="notranslate" aria-hidden="true"></div>
 
-    <!-- Third-party scripts (Google Analytics + Google Translate) are loaded
-         together, after the page has painted. Both are fetched on whichever
-         happens first: the browser going idle, the user interacting with the
-         page, or a short safety timeout — so they never compete with critical
-         CSS/JS for bandwidth or the main thread during First/Largest
-         Contentful Paint, but still load quickly for real visitors. -->
+    <!-- Third-party scripts — loaded lazily so they never touch the critical
+         rendering path or count against Total Blocking Time:
+
+         1. Google Translate (element.js) is by far the heaviest script on the
+            site (hundreds of KB of JS, many cookies) and is only needed by
+            people who actually switch language. It now loads ON DEMAND: when
+            the visitor hovers/focuses/opens the language menu (see Header),
+            when they pick a language, or on page load if they previously
+            chose a non-English language (so their translation is restored).
+
+         2. Google Analytics (gtag.js) loads on the first real user
+            interaction, with a fallback GA_FALLBACK_MS after the page's load
+            event so visitors who never scroll/tap are still counted. -->
     <script is:inline>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() { dataLayer.push(arguments); }
-      gtag("js", new Date());
-      gtag("config", "G-TPRE21PBVE");
-
-      function googleTranslateElementInit() {
-        try {
-          new google.translate.TranslateElement(
-            { pageLanguage: "en", autoDisplay: false },
-            "google_translate_element"
-          );
-        } catch (err) {}
-
-        try {
-          var saved = localStorage.getItem("vt-lang");
-          if (saved && saved !== "en") {
-            var tries = 0;
-            var poll = setInterval(function () {
-              var select = document.querySelector(".goog-te-combo");
-              tries++;
-              if (select) {
-                select.value = saved;
-                select.dispatchEvent(new Event("change"));
-                clearInterval(poll);
-              } else if (tries > 20) {
-                clearInterval(poll);
-              }
-            }, 250);
-          }
-        } catch (err) {}
-      }
-      window.googleTranslateElementInit = googleTranslateElementInit;
-
-      window.vtTranslateTo = function (code) {
-        try {
-          localStorage.setItem("vt-lang", code);
-        } catch (err) {}
-
-        if (code === "en") {
-          document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-          location.reload();
-          return;
-        }
-
-        var select = document.querySelector(".goog-te-combo");
-        if (select) {
-          select.value = code;
-          select.dispatchEvent(new Event("change"));
-        } else {
-          document.cookie = "googtrans=/en/" + code + "; path=/;";
-          location.reload();
-        }
-      };
-
       (function () {
-        var loaded = false;
-        function loadThirdParty() {
-          if (loaded) return;
-          loaded = true;
+        var GA_ID = "G-TPRE21PBVE";
+        var GA_FALLBACK_MS = 6000;
 
-          var ga = document.createElement("script");
-          ga.src = "https://www.googletagmanager.com/gtag/js?id=G-TPRE21PBVE";
-          ga.async = true;
-          document.head.appendChild(ga);
+        /* ---------- helpers ---------- */
+        function addScript(src, parent) {
+          var s = document.createElement("script");
+          s.src = src;
+          s.async = true;
+          parent.appendChild(s);
+        }
 
-          var tr = document.createElement("script");
-          tr.src = "https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit";
-          tr.async = true;
-          document.body.appendChild(tr);
+        function whenIdle(fn) {
+          if ("requestIdleCallback" in window) requestIdleCallback(fn, { timeout: 2000 });
+          else setTimeout(fn, 200);
+        }
+
+        /* ---------- Google Analytics (gtag) ---------- */
+        // The dataLayer queue is cheap and safe to set up immediately; events
+        // fired before gtag.js arrives are replayed by it once it loads.
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        window.gtag = gtag;
+        gtag("js", new Date());
+        gtag("config", GA_ID);
+
+        var gaLoaded = false;
+        function loadAnalytics() {
+          if (gaLoaded) return;
+          gaLoaded = true;
+          addScript("https://www.googletagmanager.com/gtag/js?id=" + GA_ID, document.head);
         }
 
         ["scroll", "keydown", "mousemove", "touchstart", "pointerdown"].forEach(function (evt) {
-          window.addEventListener(evt, loadThirdParty, { once: true, passive: true });
+          window.addEventListener(evt, loadAnalytics, { once: true, passive: true });
+        });
+        window.addEventListener("load", function () {
+          setTimeout(function () { whenIdle(loadAnalytics); }, GA_FALLBACK_MS);
         });
 
-        if ("requestIdleCallback" in window) {
-          requestIdleCallback(loadThirdParty, { timeout: 4000 });
-        } else {
-          window.addEventListener("load", function () {
-            setTimeout(loadThirdParty, 2000);
-          });
+        /* ---------- Google Translate (on demand) ---------- */
+        var translateRequested = false;
+        window.vtLoadTranslate = function () {
+          if (translateRequested) return;
+          translateRequested = true;
+          addScript("https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit", document.body);
+        };
+
+        window.googleTranslateElementInit = function () {
+          try {
+            new google.translate.TranslateElement(
+              { pageLanguage: "en", autoDisplay: false },
+              "google_translate_element"
+            );
+          } catch (err) {}
+
+          try {
+            var saved = localStorage.getItem("vt-lang");
+            if (saved && saved !== "en") {
+              var tries = 0;
+              var poll = setInterval(function () {
+                var select = document.querySelector(".goog-te-combo");
+                tries++;
+                if (select) {
+                  select.value = saved;
+                  select.dispatchEvent(new Event("change"));
+                  clearInterval(poll);
+                } else if (tries > 20) {
+                  clearInterval(poll);
+                }
+              }, 250);
+            }
+          } catch (err) {}
+        };
+
+        function clearTranslateCookie() {
+          var past = "expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+          var host = location.hostname;
+          document.cookie = "googtrans=; " + past;
+          document.cookie = "googtrans=; " + past + " domain=" + host + ";";
+          document.cookie = "googtrans=; " + past + " domain=." + host + ";";
+        }
+
+        window.vtTranslateTo = function (code) {
+          try {
+            localStorage.setItem("vt-lang", code);
+          } catch (err) {}
+
+          if (code === "en") {
+            clearTranslateCookie();
+            location.reload();
+            return;
+          }
+
+          // The Translate widget reads this cookie when it initialises, so the
+          // page is translated as soon as the on-demand script has loaded.
+          document.cookie = "googtrans=/en/" + code + "; path=/;";
+
+          var select = document.querySelector(".goog-te-combo");
+          if (select) {
+            select.value = code;
+            select.dispatchEvent(new Event("change"));
+          } else {
+            window.vtLoadTranslate();
+          }
+        };
+
+        // Returning visitor who already picked a language: restore it after
+        // the page has loaded (still off the critical path).
+        var wantsTranslation = false;
+        try {
+          var savedLang = localStorage.getItem("vt-lang");
+          wantsTranslation = !!savedLang && savedLang !== "en";
+        } catch (err) {}
+        if (/(?:^|;\s*)googtrans=\/en\/[a-z-]+/i.test(document.cookie)) wantsTranslation = true;
+        if (wantsTranslation) {
+          window.addEventListener("load", function () { whenIdle(window.vtLoadTranslate); });
         }
       })();
     </script>

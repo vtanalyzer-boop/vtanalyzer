@@ -225,10 +225,26 @@ const current = Astro.url.pathname;
         langToggle && langToggle.setAttribute("aria-expanded", "false");
       }
 
+      // Google Translate is loaded on demand (see Layout.astro). Start fetching
+      // it as soon as the visitor shows intent to use the language menu, so it
+      // is usually ready by the time they pick a language.
+      if (langToggle) {
+        ["pointerenter", "focus", "touchstart"].forEach(function (evt) {
+          langToggle.addEventListener(
+            evt,
+            function () {
+              if (window.vtLoadTranslate) window.vtLoadTranslate();
+            },
+            { once: true, passive: true }
+          );
+        });
+      }
+
       langToggle &&
         langMenu &&
         langToggle.addEventListener("click", function (e) {
           e.stopPropagation();
+          if (window.vtLoadTranslate) window.vtLoadTranslate();
           var isHidden = langMenu.classList.contains("hidden");
           langMenu.classList.toggle("hidden");
           langToggle.setAttribute("aria-expanded", String(isHidden));
