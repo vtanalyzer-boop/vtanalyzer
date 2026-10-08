@@ -1,5 +1,6 @@
 ---
 import Layout from "../../layouts/Layout.astro";
+import PageHero from "../../components/PageHero.astro";
 
 const title = "Contact VT Analyzer — Support, Feedback & Partnerships";
 const description =
@@ -22,15 +23,7 @@ const commonQuestions = [
 ---
 
 <Layout title={title} description={description} path="/contact/">
-  <section class="bg-void py-16 text-mist sm:py-20">
-    <div class="mx-auto max-w-3xl px-5 text-center">
-      <p class="font-mono-num text-xs uppercase tracking-[0.25em] text-red">Contact</p>
-      <h1 class="mt-3 font-display text-4xl font-bold sm:text-5xl">Get In Touch</h1>
-      <p class="mx-auto mt-4 max-w-xl text-mist/60">
-        Questions about the analyzer, feedback, or a partnership idea — we're happy to hear it.
-      </p>
-    </div>
-  </section>
+  <PageHero eyebrow="Contact" title="Get In Touch" description="Questions about the analyzer, feedback, or a partnership idea — we're happy to hear it." art="/img/hero/hero-contact.svg" />
 
   <section class="mx-auto grid max-w-5xl grid-cols-1 gap-12 px-5 py-20 lg:grid-cols-5">
     <div class="lg:col-span-2">

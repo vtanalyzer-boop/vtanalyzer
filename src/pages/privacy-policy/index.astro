@@ -1,17 +1,15 @@
 ---
 import Layout from "../../layouts/Layout.astro";
+import PageHero from "../../components/PageHero.astro";
 
 const title = "Privacy Policy | VT Analyzer";
 const description = "How VT Analyzer collects, uses, and protects your data when you use our YouTube thumbnail analyzer.";
 ---
 
 <Layout title={title} description={description} path="/privacy-policy/">
-  <section class="bg-void py-14 text-mist">
-    <div class="mx-auto max-w-3xl px-5">
-      <h1 class="font-display text-3xl font-bold sm:text-4xl">Privacy Policy</h1>
-      <p class="mt-3 text-sm text-mist/50">Last updated: July 1, 2026</p>
-    </div>
-  </section>
+  <PageHero title="Privacy Policy" size="sm" art="/img/hero/hero-privacy.svg" artWidth={360} artHeight={300}>
+    <p class="mt-3 text-sm text-mist/50">Last updated: July 1, 2026</p>
+  </PageHero>
 
   <section class="mx-auto max-w-3xl space-y-10 px-5 py-16 text-sm leading-relaxed text-ink/70 dark:text-smoke sm:text-base">
     <div class="grid grid-cols-1 gap-4 sm:grid-cols-3">

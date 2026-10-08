@@ -43,11 +43,11 @@ const { title, description, path, ogImage, noindex, jsonLd } = Astro.props;
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <Seo title={title} description={description} path={path} ogImage={ogImage} noindex={noindex} jsonLd={jsonLd} />
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     
     <script src="https://quge5.com/88/tag.min.js" data-zone="291880" async data-cfasync="false"></script>
     <meta name="monetag" content="963de2dbc1252b448a1dbef2746b74ed">
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-
     <!-- Apply saved/system theme before first paint to avoid a light/dark flash -->
     <script is:inline>
       (function () {
@@ -207,6 +207,17 @@ const { title, description, path, ogImage, noindex, jsonLd } = Astro.props;
         if (wantsTranslation) {
           window.addEventListener("load", function () { whenIdle(window.vtLoadTranslate); });
         }
+      })();
+    </script>
+    <!-- Decorative hero animations start only after the page has fully loaded, so
+         they can never delay first paint (see "anim-ready" in global.css). -->
+    <script is:inline>
+      (function () {
+        function go() {
+          setTimeout(function () { document.documentElement.classList.add("anim-ready"); }, 250);
+        }
+        if (document.readyState === "complete") go();
+        else window.addEventListener("load", go, { once: true });
       })();
     </script>
   </body>

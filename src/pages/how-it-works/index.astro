@@ -1,5 +1,6 @@
 ---
 import Layout from "../../layouts/Layout.astro";
+import PageHero from "../../components/PageHero.astro";
 
 const title = "How Our YouTube Thumbnail SEO Score Checker Works | VT Analyzer";
 const description =
@@ -46,15 +47,7 @@ const factors = [
 ---
 
 <Layout title={title} description={description} path="/how-it-works/">
-  <section class="bg-void py-16 text-mist sm:py-20">
-    <div class="mx-auto max-w-3xl px-5 text-center">
-      <p class="font-mono-num text-xs uppercase tracking-[0.25em] text-red">Process</p>
-      <h1 class="mt-3 font-display text-4xl font-bold sm:text-5xl">How Our Thumbnail Analyzer Works</h1>
-      <p class="mx-auto mt-4 max-w-xl text-mist/60">
-        A transparent look at the process behind every thumbnail score, mobile preview, and suggestion.
-      </p>
-    </div>
-  </section>
+  <PageHero eyebrow="Process" title="How Our Thumbnail Analyzer Works" description="A transparent look at the process behind every thumbnail score, mobile preview, and suggestion." art="/img/hero/hero-how.svg" artWidth={520} artHeight={200} />
 
   <section class="mx-auto max-w-3xl px-5 pt-16">
     <p class="text-sm leading-relaxed text-ink/65 dark:text-smoke sm:text-base">

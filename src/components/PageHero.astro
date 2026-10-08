@@ -1,0 +1,93 @@
+---
+/**
+ * Shared animated hero used by every inner page.
+ *
+ * - Animated background is pure CSS (drifting glows, panning grid, scan line):
+ *   no JavaScript, no images, no layout cost.
+ * - The illustration is an original SVG (no third-party / copyrighted art) that
+ *   is lazy-loaded with explicit width/height, so it can't cause layout shift
+ *   and never delays the headline.
+ * - Headline text is static (never typed or faded in) so LCP and SEO are
+ *   unaffected.
+ */
+export interface Props {
+  title: string;
+  eyebrow?: string;
+  eyebrowHref?: string;
+  description?: string;
+  /** Path of the lazy-loaded illustration, e.g. "/img/hero/hero-faq.svg" */
+  art?: string;
+  artWidth?: number;
+  artHeight?: number;
+  /** "lg" = full hero, "sm" = compact (legal pages) */
+  /** Rounded border around the art (for full-bleed 16:9 covers) */
+  artFrame?: boolean;
+  size?: "lg" | "sm";
+  align?: "center" | "left";
+}
+
+const {
+  title,
+  eyebrow,
+  eyebrowHref,
+  description,
+  art,
+  artWidth = 480,
+  artHeight = 360,
+  artFrame = false,
+  size = "lg",
+  align = "center",
+} = Astro.props;
+
+const pad = size === "sm" ? "py-12 sm:py-14" : "py-14 sm:py-20";
+const h1Size = size === "sm" ? "text-3xl sm:text-4xl" : "text-4xl sm:text-5xl";
+const wide = artWidth / artHeight > 2;
+const artMax = size === "sm" ? "max-w-[190px] sm:max-w-[230px]" : wide ? "max-w-[340px] sm:max-w-[520px]" : artFrame ? "max-w-[340px] sm:max-w-[440px]" : "max-w-[260px] sm:max-w-[360px]";
+const textAlign = art ? "text-center lg:text-left" : align === "center" ? "text-center" : "text-left";
+const descAlign = art ? "mx-auto lg:mx-0" : align === "center" ? "mx-auto" : "";
+---
+
+<section class="hero relative isolate overflow-hidden bg-void text-mist">
+  <div class="hero-bg pointer-events-none absolute inset-0 -z-10" aria-hidden="true">
+    <span class="hero-orb hero-orb-a"></span>
+    <span class="hero-orb hero-orb-b"></span>
+    <span class="hero-grid"></span>
+    <span class="hero-sweep"></span>
+  </div>
+  <div class="grain pointer-events-none absolute inset-0" aria-hidden="true"></div>
+
+  <div
+    class:list={[
+      "relative mx-auto grid max-w-6xl items-center gap-8 px-5",
+      pad,
+      art ? "grid-cols-1 lg:grid-cols-[1.2fr_0.8fr] lg:gap-14" : "max-w-3xl",
+    ]}
+  >
+    <div class={textAlign}>
+      {eyebrow && (
+        <p class="font-mono-num text-xs uppercase tracking-[0.25em] text-red">
+          {eyebrowHref ? <a href={eyebrowHref} class="hover:underline">{eyebrow}</a> : eyebrow}
+        </p>
+      )}
+      <h1 class:list={["mt-3 font-display font-bold leading-tight", h1Size]}>{title}</h1>
+      {description && (
+        <p class:list={["mt-4 max-w-xl leading-relaxed text-mist/65", descAlign]}>{description}</p>
+      )}
+      <slot />
+    </div>
+
+    {art && (
+      <div class="hero-art-wrap flex justify-center lg:justify-end">
+        <img
+          src={art}
+          width={artWidth}
+          height={artHeight}
+          alt=""
+          loading="lazy"
+          decoding="async"
+          class:list={["h-auto w-full", artMax, artFrame && "rounded-xl border border-white/10"]}
+        />
+      </div>
+    )}
+  </div>
+</section>

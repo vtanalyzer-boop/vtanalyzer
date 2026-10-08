@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" width="640" height="360"><style>
+.fl{animation:fl 6s ease-in-out infinite}.fl2{animation:fl 7.5s ease-in-out -2s infinite}.fl3{animation:fl 5s ease-in-out -1s infinite}
+@keyframes fl{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+.pu{animation:pu 2.6s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
+@keyframes pu{0%,100%{opacity:.55;transform:scale(1)}50%{opacity:1;transform:scale(1.05)}}
+.da{stroke-dasharray:7 9;animation:da 2.4s linear infinite}@keyframes da{to{stroke-dashoffset:-64}}
+.sw{animation:sw 4.4s ease-in-out infinite}@keyframes sw{0%{transform:translateY(0);opacity:0}12%{opacity:.9}88%{opacity:.9}100%{transform:translateY(357px);opacity:0}}
+.tw{animation:tw 3s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
+@keyframes tw{0%,100%{opacity:.25;transform:scale(.8)}50%{opacity:1;transform:scale(1.15)}}
+.bar{animation:bar 2.8s ease-in-out infinite;transform-box:fill-box;transform-origin:bottom}
+@keyframes bar{0%,100%{transform:scaleY(1)}50%{transform:scaleY(.62)}}
+.fly{animation:fly 5s ease-in-out infinite}@keyframes fly{0%,100%{transform:translate(0,0) rotate(0)}50%{transform:translate(10px,-12px) rotate(4deg)}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important}}
+</style><defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3a0a16"/><stop offset=".55" stop-color="#14141a"/><stop offset="1" stop-color="#3b2a05"/></linearGradient>
+<radialGradient id="gl" cx=".72" cy=".45" r=".55"><stop offset="0" stop-color="#ff0033" stop-opacity=".5"/><stop offset="1" stop-color="#ff0033" stop-opacity="0"/></radialGradient>
+<linearGradient id="sc" x1="0" x2="1"><stop offset="0" stop-color="#ff0033" stop-opacity="0"/><stop offset=".5" stop-color="#ff3b5c"/><stop offset="1" stop-color="#ff0033" stop-opacity="0"/></linearGradient>
+<clipPath id="cp"><rect width="640" height="360" rx="0"/></clipPath></defs><g clip-path="url(#cp)"><rect width="640" height="360" fill="url(#bg)"/><rect width="640" height="360" fill="url(#gl)"/><path d="M0 0V360M40 0V360M80 0V360M120 0V360M160 0V360M200 0V360M240 0V360M280 0V360M320 0V360M360 0V360M400 0V360M440 0V360M480 0V360M520 0V360M560 0V360M600 0V360M640 0V360M0 0H640M0 40H640M0 80H640M0 120H640M0 160H640M0 200H640M0 240H640M0 280H640M0 320H640M0 360H640" stroke="#fff" stroke-opacity=".045" fill="none"/>
+<g transform="rotate(-6 250 170)" opacity=".5"><rect x="70" y="70" width="330" height="186" rx="14" fill="#2a2a33" stroke="#fff" stroke-opacity=".2" stroke-width="1.5"/></g>
+<g transform="rotate(4 250 170)" opacity=".75"><rect x="86" y="66" width="330" height="186" rx="14" fill="#1c1c22" stroke="#ffb100" stroke-opacity=".5" stroke-width="1.5"/></g>
+<g class="fl2"><rect x="100" y="70" width="340" height="190" rx="14" fill="#fafaf7" stroke="#fff" stroke-opacity="1" stroke-width="1.5"/><rect x="124" y="94" width="150" height="26" rx="6" fill="#101014"/><rect x="124" y="130" width="112" height="26" rx="6" fill="#ff0033"/><rect x="124" y="170" width="100" height="10" rx="5" fill="#101014" fill-opacity=".3"/><circle cx="366" cy="150" r="26" fill="#ffb100"/><path d="M316.6 217.60000000000002c0-40.300000000000004 22.099999999999998-49.4 49.4-49.4s49.4 9.1 49.4 49.4z" fill="#101014"/><path d="M100 92V70H122M418 70H440V92M440 238V260H418M122 260H100V238" fill="none" stroke="#ff0033" stroke-width="4" stroke-linecap="square"/></g>
+<g class="fl"><path d="M470 120l0 78 22-20 16 36 14-7-16-35 29-3z" fill="#fafaf7" stroke="#0b0b0f" stroke-width="3" stroke-linejoin="round"/></g>
+<g class="fl3"><circle cx="520" cy="270" r="14" fill="#ff0033"/><circle cx="556" cy="270" r="14" fill="#ffb100"/><circle cx="592" cy="270" r="14" fill="#22c55e"/></g>
+<g><rect x="380" y="36" width="86" height="26" rx="13" fill="#0b0b0f" fill-opacity=".85" stroke="#ffb100" stroke-width="1.5"/><circle cx="393" cy="49" r="3.5" fill="#ffb100"/><text x="403" y="53.5" font-family="ui-monospace,Menlo,Consolas,monospace" font-size="11" font-weight="700" fill="#fafaf7">1280×720</text></g><circle class="tw" style="animation-delay:0.0s" cx="40" cy="310" r="4" fill="#fafaf7"/><circle class="tw" style="animation-delay:0.5s" cx="600" cy="70" r="4" fill="#ff3b5c"/><circle class="tw" style="animation-delay:1.0s" cx="34" cy="50" r="3" fill="#ffb100"/><rect class="sw" width="640" height="3" fill="url(#sc)"/></g></svg>

@@ -3,6 +3,7 @@ import Layout from "../layouts/Layout.astro";
 import AnalyzerTool from "../components/AnalyzerTool.astro";
 import FaqAccordion from "../components/FaqAccordion.astro";
 import { faqs } from "../data/faqs";
+import { blogPosts } from "../data/blogPosts";
 
 const title = "YouTube Thumbnail — Check Youtube Thumbnail | VT Analyzer";
 const description =
@@ -52,6 +53,12 @@ const jsonLd = [
   },
 ];
 
+const latestPosts = [...blogPosts]
+  .sort((a, b) => new Date(b.publishDate).getTime() - new Date(a.publishDate).getTime())
+  .slice(0, 3);
+
+const typedWords = ["readability", "contrast", "focal point", "mobile appearance", "click-through potential"];
+
 const features = [
   {
     icon: "M12 15C13.6569 15 15 13.6569 15 12C15 10.3431 13.6569 9 12 9C10.3431 9 9 10.3431 9 12C9 13.6569 10.3431 15 12 15Z",
@@ -85,8 +92,14 @@ const stats = [
 
 <Layout title={title} description={description} path="/" jsonLd={jsonLd}>
   <!-- Hero -->
-  <section class="relative overflow-hidden bg-void text-mist">
-    <div class="grain pointer-events-none absolute inset-0"></div>
+  <section class="hero relative isolate overflow-hidden bg-void text-mist">
+    <div class="hero-bg pointer-events-none absolute inset-0 -z-10" aria-hidden="true">
+      <span class="hero-orb hero-orb-a"></span>
+      <span class="hero-orb hero-orb-b"></span>
+      <span class="hero-grid"></span>
+      <span class="hero-sweep"></span>
+    </div>
+    <div class="grain pointer-events-none absolute inset-0" aria-hidden="true"></div>
     <div class="relative mx-auto grid max-w-6xl grid-cols-1 items-center gap-12 px-5 py-20 sm:py-28 lg:grid-cols-2">
       <div>
         <p class="font-mono-num inline-flex items-center gap-2 rounded-full border border-white/15 px-3 py-1 text-xs uppercase tracking-widest text-mist/70">
@@ -101,6 +114,11 @@ const stats = [
           focal point, and mobile appearance — the exact factors that decide whether a viewer
           clicks or scrolls past.
         </p>
+        <!-- Typing line: decorative, so the H1 + intro stay static for SEO/LCP. The
+             first phrase is real text, so it also reads fine without JavaScript. -->
+        <p class="font-mono-num mt-4 h-6 overflow-hidden whitespace-nowrap text-sm text-mist/60 sm:text-base" aria-hidden="true">
+          <span>We score your </span><span id="typed" class="text-amber" data-words={JSON.stringify(typedWords)}>{typedWords[0]}</span><span class="typed-caret text-amber"></span>
+        </p>
         <div class="mt-8 flex flex-wrap gap-3">
           <a href="#analyzer" class="rounded-sm bg-red-dark px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-red-darker">
             Analyze My Thumbnail
@@ -113,10 +131,19 @@ const stats = [
 
       <div class="viewfinder relative mx-auto w-full max-w-md rounded-sm border border-white/10 bg-white/[0.03] p-3">
         <span class="vf-tr"></span><span class="vf-br"></span>
-        <div class="flex aspect-video items-center justify-center rounded-sm bg-gradient-to-br from-red/25 via-ink to-amber/10">
-          <div class="text-center">
-            <p class="font-display text-6xl font-bold text-white">87</p>
-            <p class="font-mono-num mt-1 text-xs uppercase tracking-widest text-mist/50">Thumbnail Score</p>
+        <div class="relative aspect-video overflow-hidden rounded-sm bg-charcoal">
+          <img
+            src="/img/hero/hero-home.svg"
+            width="640"
+            height="360"
+            alt=""
+            loading="lazy"
+            decoding="async"
+            class="h-full w-full object-cover"
+          />
+          <div class="absolute bottom-3 right-3 rounded-sm border border-white/15 bg-void/85 px-3 py-1.5 text-right">
+            <p class="font-display text-3xl font-bold leading-none text-white">87</p>
+            <p class="font-mono-num mt-1 text-[10px] uppercase tracking-widest text-mist/60">Thumbnail Score</p>
           </div>
         </div>
         <div class="mt-3 flex items-center justify-between px-1 text-xs text-mist/50">
@@ -205,6 +232,46 @@ const stats = [
     </div>
   </section>
 
+  <!-- Latest guides: lazy-loaded covers + internal links to the blog -->
+  <section class="mx-auto max-w-6xl px-5 py-20">
+    <div class="flex flex-wrap items-end justify-between gap-4">
+      <div>
+        <p class="font-mono-num text-xs uppercase tracking-[0.25em] text-red-dark dark:text-red">From the blog</p>
+        <h2 class="mt-2 font-display text-2xl font-bold text-ink dark:text-fog sm:text-3xl">Latest Thumbnail Guides</h2>
+      </div>
+      <a href="/blog/" class="text-sm font-semibold text-red-dark hover:underline dark:text-red">All guides &rarr;</a>
+    </div>
+    <ul class="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      {latestPosts.map((post) => (
+        <li>
+          <a
+            href={`/blog/${post.slug}/`}
+            class="hero-card group block h-full overflow-hidden rounded-xl border border-line bg-card dark:border-seam dark:bg-charcoal"
+          >
+            <div class="aspect-video overflow-hidden bg-charcoal">
+              <img
+                src={post.cover}
+                width="640"
+                height="360"
+                alt=""
+                loading="lazy"
+                decoding="async"
+                class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+              />
+            </div>
+            <div class="p-5">
+              <p class="text-xs text-ink/50 dark:text-smoke">{post.readTime}</p>
+              <h3 class="mt-2 font-display text-lg font-bold leading-snug text-ink group-hover:text-red-dark dark:text-fog dark:group-hover:text-red">
+                {post.title}
+              </h3>
+              <span class="mt-3 inline-block text-sm font-semibold text-red-dark dark:text-red">Read guide &rarr;</span>
+            </div>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </section>
+
   <!-- Mini FAQ -->
   <section class="mx-auto max-w-4xl px-5 py-20">
     <div class="flex flex-wrap items-end justify-between gap-4">
@@ -232,3 +299,41 @@ const stats = [
     </div>
   </section>
 </Layout>
+
+<script>
+  // Typing animation for the hero line. Decorative only — the first phrase is
+  // already in the HTML, and it is skipped entirely for reduced-motion users.
+  const typedEl = document.getElementById("typed");
+  if (typedEl && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    const words: string[] = JSON.parse(typedEl.dataset.words || "[]");
+    if (words.length > 1) {
+      let w = 0;
+      let i = words[0].length;
+      let deleting = true;
+      const step = () => {
+        if (document.hidden) {
+          setTimeout(step, 1000);
+          return;
+        }
+        const word = words[w];
+        typedEl.textContent = word.slice(0, i);
+        let delay = deleting ? 40 : 85;
+        if (!deleting && i === word.length) {
+          deleting = true;
+          delay = 1700;
+        } else if (deleting && i === 0) {
+          deleting = false;
+          w = (w + 1) % words.length;
+          delay = 350;
+        } else {
+          i += deleting ? -1 : 1;
+        }
+        setTimeout(step, delay);
+      };
+      // Start only after the page has fully loaded so it never competes with first paint.
+      const begin = () => setTimeout(step, 1800);
+      if (document.readyState === "complete") begin();
+      else window.addEventListener("load", begin, { once: true });
+    }
+  }
+</script>

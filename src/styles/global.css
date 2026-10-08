@@ -182,3 +182,116 @@ details > summary::-webkit-details-marker {
 details[open] .accordion-icon {
   transform: rotate(45deg);
 }
+
+/* ------------------------------------------------------------------
+   Animated hero backgrounds (shared by PageHero + homepage/blog heroes).
+   Pure CSS, no images, no JS-driven motion.
+
+   PERFORMANCE: every animation below only starts once <html> gets the
+   `anim-ready` class (added shortly AFTER the window load event by a tiny
+   script in Layout.astro). Until then the hero is a static, fully-rendered
+   frame, so decorative motion can never delay first paint / LCP on slow
+   phones. Only compositor-friendly properties (transform, opacity) are
+   animated — no background-position or filter animations, which repaint
+   on the main thread every frame. Reduced-motion users get none of it.
+------------------------------------------------------------------- */
+.hero-orb {
+  position: absolute;
+  border-radius: 9999px;
+}
+.hero-orb-a {
+  width: 560px;
+  height: 560px;
+  top: -240px;
+  left: -160px;
+  background: radial-gradient(circle at center, rgba(255, 0, 51, 0.32), transparent 66%);
+}
+.hero-orb-b {
+  width: 480px;
+  height: 480px;
+  bottom: -220px;
+  right: -120px;
+  background: radial-gradient(circle at center, rgba(255, 177, 0, 0.2), transparent 66%);
+}
+.hero-grid {
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.045) 1px, transparent 1px);
+  background-size: 44px 44px;
+  -webkit-mask-image: radial-gradient(ellipse at center, #000 25%, transparent 75%);
+  mask-image: radial-gradient(ellipse at center, #000 25%, transparent 75%);
+}
+.hero-sweep {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(255, 59, 92, 0.75), transparent);
+  opacity: 0;
+}
+
+.anim-ready .hero-orb-a {
+  will-change: transform;
+  animation: orb-a 16s ease-in-out infinite alternate;
+}
+.anim-ready .hero-orb-b {
+  will-change: transform;
+  animation: orb-b 20s ease-in-out infinite alternate;
+}
+.anim-ready .hero-sweep {
+  will-change: transform, opacity;
+  animation: hero-sweep 7s ease-in-out infinite;
+}
+@keyframes orb-a {
+  to { transform: translate3d(90px, 50px, 0) scale(1.12); }
+}
+@keyframes orb-b {
+  to { transform: translate3d(-80px, -40px, 0) scale(1.1); }
+}
+@keyframes hero-sweep {
+  0% { transform: translateY(0); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { transform: translateY(380px); opacity: 0; }
+}
+
+/* Homepage typing line (the typing itself is driven by a small script that
+   also waits for the load event) */
+.typed-caret {
+  display: inline-block;
+  width: 2px;
+  height: 1.05em;
+  margin-left: 3px;
+  vertical-align: -0.14em;
+  background: currentColor;
+}
+.anim-ready .typed-caret {
+  animation: caret-blink 1s steps(1) infinite;
+}
+@keyframes caret-blink {
+  50% { opacity: 0; }
+}
+
+/* Article cards (blog hero + homepage "latest guides") */
+.hero-card {
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+.hero-card:hover,
+.hero-card:focus-visible {
+  transform: translateY(-4px);
+  border-color: rgba(255, 59, 92, 0.6);
+  box-shadow: 0 18px 40px -18px rgba(255, 0, 51, 0.45);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-orb,
+  .hero-sweep,
+  .typed-caret {
+    animation: none !important;
+  }
+  .hero-card {
+    transition: none;
+  }
+}

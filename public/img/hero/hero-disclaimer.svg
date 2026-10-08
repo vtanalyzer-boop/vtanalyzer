@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 300" width="360" height="300"><style>
+.fl{animation:fl 6s ease-in-out infinite}.fl2{animation:fl 7.5s ease-in-out -2s infinite}.fl3{animation:fl 5s ease-in-out -1s infinite}
+@keyframes fl{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+.pu{animation:pu 2.6s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
+@keyframes pu{0%,100%{opacity:.55;transform:scale(1)}50%{opacity:1;transform:scale(1.05)}}
+.da{stroke-dasharray:7 9;animation:da 2.4s linear infinite}@keyframes da{to{stroke-dashoffset:-64}}
+.sw{animation:sw 4.4s ease-in-out infinite}@keyframes sw{0%{transform:translateY(0);opacity:0}12%{opacity:.9}88%{opacity:.9}100%{transform:translateY(357px);opacity:0}}
+.tw{animation:tw 3s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
+@keyframes tw{0%,100%{opacity:.25;transform:scale(.8)}50%{opacity:1;transform:scale(1.15)}}
+.bar{animation:bar 2.8s ease-in-out infinite;transform-box:fill-box;transform-origin:bottom}
+@keyframes bar{0%,100%{transform:scaleY(1)}50%{transform:scaleY(.62)}}
+.fly{animation:fly 5s ease-in-out infinite}@keyframes fly{0%,100%{transform:translate(0,0) rotate(0)}50%{transform:translate(10px,-12px) rotate(4deg)}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important}}
+</style><defs></defs>
+<circle class="pu" cx="180" cy="150" r="112" fill="none" stroke="#ffb100" stroke-opacity=".4" stroke-width="2" stroke-dasharray="4 10"/>
+<g class="fl2"><path d="M180 46l108 188H72z" fill="#17171c" stroke="#ffb100" stroke-width="6" stroke-linejoin="round"/><rect x="171" y="104" width="18" height="70" rx="9" fill="#ffb100"/><circle cx="180" cy="202" r="11" fill="#ffb100"/></g>
+<circle class="tw" style="animation-delay:0.0s" cx="46" cy="80" r="4" fill="#ff3b5c"/><circle class="tw" style="animation-delay:0.5s" cx="318" cy="70" r="3" fill="#fafaf7"/><circle class="tw" style="animation-delay:1.0s" cx="310" cy="246" r="4" fill="#ffb100"/><circle class="tw" style="animation-delay:1.5s" cx="50" cy="236" r="3" fill="#22c55e"/></svg>

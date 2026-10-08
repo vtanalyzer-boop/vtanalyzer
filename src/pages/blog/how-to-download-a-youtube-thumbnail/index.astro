@@ -1,5 +1,6 @@
 ---
 import Layout from "../../../layouts/Layout.astro";
+import PageHero from "../../../components/PageHero.astro";
 import { blogPosts } from "../../../data/blogPosts";
 
 const post = blogPosts.find((p) => p.slug === "how-to-download-a-youtube-thumbnail")!;
@@ -55,23 +56,17 @@ const jsonLd = [
 ];
 ---
 
-<Layout title={post.title} description={post.description} path={`/blog/${post.slug}/`} jsonLd={jsonLd}>
+<Layout title={post.seoTitle} description={post.description} path={`/blog/${post.slug}/`} jsonLd={jsonLd}>
   <article>
-    <section class="bg-void py-16 text-mist sm:py-20">
-      <div class="mx-auto max-w-3xl px-5">
-        <p class="font-mono-num text-xs uppercase tracking-[0.25em] text-red">
-          <a href="/blog/" class="hover:underline">Blog</a>
-        </p>
-        <h1 class="mt-3 font-display text-3xl font-bold sm:text-4xl">{post.title}</h1>
-        <p class="mt-4 text-sm text-mist/60">
-          <time datetime={post.publishDate}>
-            {new Date(post.publishDate).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}
-          </time>
-          <span aria-hidden="true"> &middot; </span>
-          {post.readTime}
-        </p>
-      </div>
-    </section>
+    <PageHero eyebrow="Blog" eyebrowHref="/blog/" title={post.title} art={post.cover} artWidth={640} artHeight={360} artFrame>
+      <p class="mt-4 text-sm text-mist/60">
+        <time datetime={post.publishDate}>
+          {new Date(post.publishDate).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}
+        </time>
+        <span aria-hidden="true"> &middot; </span>
+        {post.readTime}
+      </p>
+    </PageHero>
 
     <section class="mx-auto max-w-3xl space-y-10 px-5 py-16 text-sm leading-relaxed text-ink/70 dark:text-smoke sm:text-base">
       <p>

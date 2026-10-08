@@ -170,7 +170,11 @@
   dropZone.addEventListener("click", () => fileInput.click());
 
   fileInput.addEventListener("change", () => {
-    if (fileInput.files?.[0]) analyzeFile(fileInput.files[0]);
+    const file = fileInput.files?.[0];
+    // Reset so choosing the same photo again still fires "change" (common on mobile).
+    // Safe: `file` already holds its own reference to the selected File.
+    if (file) analyzeFile(file);
+    fileInput.value = "";
   });
 
   urlSubmit.addEventListener("click", () => {
@@ -184,12 +188,28 @@
 
   function analyzeFile(file: File) {
     clearError();
-    if (!file.type.match("image.*")) {
+    const looksLikeImage = file.type.startsWith("image/") || /\.(jpe?g|png|webp|gif|avif|bmp|heic|heif)$/i.test(file.name);
+    if (!looksLikeImage) {
       showError("Please upload an image file (JPG, PNG, or WebP).");
       return;
     }
-    const objectUrl = URL.createObjectURL(file);
-    runAnalysis(objectUrl, file.size);
+    if (/hei[cf]/i.test(file.type) || /\.hei[cf]$/i.test(file.name)) {
+      showError("HEIC/HEIF photos aren't supported by browsers. Please export or screenshot it as JPG or PNG and try again.");
+      return;
+    }
+
+    // Read the file into a data: URL instead of URL.createObjectURL(). A blob:
+    // URL is blocked by the site's Content-Security-Policy unless img-src lists
+    // "blob:", which made uploads work locally but fail on Cloudflare. data: is
+    // already allowed, so uploads from desktop and mobile work either way.
+    loading.classList.remove("hidden");
+    const reader = new FileReader();
+    reader.onload = () => runAnalysis(String(reader.result), file.size);
+    reader.onerror = () => {
+      loading.classList.add("hidden");
+      showError("Couldn't read that file. Please try again or choose a different image.");
+    };
+    reader.readAsDataURL(file);
   }
 
   function analyzeUrl(url: string) {
@@ -197,12 +217,15 @@
     runAnalysis(url, null);
   }
 
-  function runAnalysis(src: string, fileSize: number | null) {
+  function runAnalysis(src: string, fileSize: number | null, useCors = true) {
     loading.classList.remove("hidden");
     results.classList.add("hidden");
 
     const img = new Image();
-    img.crossOrigin = "anonymous";
+    // CORS mode lets us read pixels, but the browser refuses to load the image
+    // at all if the host sends no CORS headers (most hosts). Local blob:/data:
+    // images never need it; remote ones retry without it on error (below).
+    if (useCors && !src.startsWith("blob:") && !src.startsWith("data:")) img.crossOrigin = "anonymous";
     img.onload = () => {
       try {
         const data = sampleImage(img);
@@ -216,6 +239,12 @@
       loading.classList.add("hidden");
     };
     img.onerror = () => {
+      // Remote host without CORS: retry once without CORS. Pixels can't be read
+      // then, so the existing catch above falls back to metadata-only scoring.
+      if (useCors && !src.startsWith("blob:") && !src.startsWith("data:")) {
+        runAnalysis(src, fileSize, false);
+        return;
+      }
       loading.classList.add("hidden");
       showError("Couldn't load that image. Check the URL or try uploading the file directly.");
     };

@@ -1,5 +1,6 @@
 ---
 import Layout from "../../layouts/Layout.astro";
+import PageHero from "../../components/PageHero.astro";
 
 const title = "About VT Analyzer — Why We Built a Free YouTube Thumbnail Checker";
 const description =
@@ -7,15 +8,7 @@ const description =
 ---
 
 <Layout title={title} description={description} path="/about/">
-  <section class="bg-void py-16 text-mist sm:py-20">
-    <div class="mx-auto max-w-3xl px-5 text-center">
-      <p class="font-mono-num text-xs uppercase tracking-[0.25em] text-red">About</p>
-      <h1 class="mt-3 font-display text-4xl font-bold sm:text-5xl">Built by Creators Tired of Guessing</h1>
-      <p class="mx-auto mt-4 max-w-xl text-mist/60">
-        VT Analyzer exists because great videos still get skipped over when the thumbnail doesn't earn the click.
-      </p>
-    </div>
-  </section>
+  <PageHero eyebrow="About" title="Built by Creators Tired of Guessing" description="VT Analyzer exists because great videos still get skipped over when the thumbnail doesn't earn the click." art="/img/hero/hero-about.svg" />
 
   <section class="mx-auto max-w-3xl space-y-16 px-5 py-20">
     <div>
