@@ -7,6 +7,7 @@
   X-Robots-Tag: index, follow
   Content-Security-Policy: default-src 'self'; base-uri 'self'; object-src 'none'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://translate.google.com https://translate.googleapis.com https://www.gstatic.com https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://translate.googleapis.com https://www.gstatic.com; img-src 'self' data: blob: https: https://www.gstatic.com https://translate.googleapis.com https://www.google.com https://www.googletagmanager.com https://*.google-analytics.com; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com https://stats.g.doubleclick.net https://translate.googleapis.com https://translate-pa.googleapis.com https://static.cloudflareinsights.com https://cloudflareinsights.com; frame-src https://translate.google.com https://translate.googleapis.com; frame-ancestors 'self'
 https://vtanalyzer.vtanalyze.workers.dev/
+https://monetag.com/
 /_astro/*
   Cache-Control: public, max-age=31536000, immutable
 
@@ -37,3 +38,6 @@ https://vtanalyzer.vtanalyze.workers.dev/
 /llms.txt
   Cache-Control: public, max-age=3600
   X-Robots-Tag: noindex
+
+/*
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' *.monetag.com; connect-src 'self' *.monetag.com;
