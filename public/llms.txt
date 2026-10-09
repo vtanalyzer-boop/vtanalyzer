@@ -14,8 +14,10 @@ All analysis runs client-side in the browser (HTML5 Canvas API) — no image is 
 
 ## Blog
 - [Blog Index](https://vtanalyzer.site/blog/): Guides on making, sizing, and testing YouTube thumbnails.
-- [How to Make a YouTube Thumbnail](https://vtanalyzer.site/blog/how-to-make-a-youtube-thumbnail/): Complete guide covering thumbnail size, step-by-step creation, free tools (Canva, Photoshop, mobile apps), and common questions.
-- [How to Download a YouTube Thumbnail](https://vtanalyzer.site/blog/how-to-download-a-youtube-thumbnail/): The direct-link method for downloading any YouTube thumbnail at its highest resolution, a full resolution reference table, and why Instagram thumbnails require a different approach.
+- [How to Make a YouTube Thumbnail](https://vtanalyzer.site/blog/how-to-make-a-youtube-thumbnail/): Complete guide covering YouTube thumbnail size, choosing a thumbnail background, a Fortnite thumbnail example, step-by-step creation, free tools (Canva, Photoshop, mobile apps), and common questions.
+- [How to Download a YouTube Thumbnail](https://vtanalyzer.site/blog/how-to-download-a-youtube-thumbnail/): The direct-link method (no thumbnail downloader needed) for saving any YT thumbnail at its highest resolution, a full resolution reference table, and why Instagram thumbnails require a different approach.
+- [How to Make a Fortnite Thumbnail](https://vtanalyzer.site/blog/how-to-make-a-fortnite-thumbnail/): Step-by-step Fortnite thumbnail guide covering YouTube thumbnail size, thumbnail background choices, layout, and a mobile check.
+- [How Much Do Thumbnail Artists Get Paid?](https://vtanalyzer.site/blog/how-much-do-thumbnail-artists-get-paid/): Typical freelance thumbnail rates, what affects pricing, and the reported MrBeast per-thumbnail figure.
 
 ## Policies
 - [Privacy Policy](https://vtanalyzer.site/privacy-policy/)

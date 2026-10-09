@@ -1,0 +1,162 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import PageHero from "../../../components/PageHero.astro";
+import { blogPosts } from "../../../data/blogPosts";
+
+const post = blogPosts.find((p) => p.slug === "how-to-make-a-fortnite-thumbnail")!;
+
+const microFaqs = [
+  {
+    q: "What size should a Fortnite thumbnail be?",
+    a: "A Fortnite thumbnail follows the standard YouTube thumbnail size: 1280×720 pixels at a 16:9 ratio, under 2MB. Game screenshots captured at 1920×1080 share that ratio and scale down cleanly, so they work fine as a starting point.",
+  },
+  {
+    q: "What is the best thumbnail background for Fortnite videos?",
+    a: "A bright gradient, a blurred slice of the map, or a darkened gameplay frame. All three keep the thumbnail background calmer than the raw screenshot, so your character and headline stay readable at phone size.",
+  },
+  {
+    q: "Can I use an official skin render in my Fortnite thumbnail?",
+    a: "Many gaming creators do, but the artwork belongs to the game's publisher. Check the publisher's current content-creator guidelines before using it, and avoid implying that your channel is officially endorsed.",
+  },
+  {
+    q: "How do I test a Fortnite thumbnail before uploading?",
+    a: "Run it through a thumbnail analyzer like ours and compare the mobile and web scores. If the mobile score is low, the usual culprits are a busy thumbnail background or text that's too small.",
+  },
+  {
+    q: "Can I save a Fortnite YT thumbnail from another creator for reference?",
+    a: "You can save any public YT thumbnail by its direct image link without a thumbnail downloader. It's fine for studying composition; just don't republish someone else's artwork as your own.",
+  },
+];
+
+const jsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: post.title,
+    description: post.description,
+    datePublished: post.publishDate,
+    dateModified: post.publishDate,
+    author: { "@type": "Organization", name: "VT Analyzer" },
+    publisher: { "@type": "Organization", name: "VT Analyzer" },
+    mainEntityOfPage: `https://vtanalyzer.site/blog/${post.slug}/`,
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: microFaqs.map((f) => ({
+      "@type": "Question",
+      name: f.q,
+      acceptedAnswer: { "@type": "Answer", text: f.a },
+    })),
+  },
+];
+---
+
+<Layout title={post.seoTitle} description={post.description} path={`/blog/${post.slug}/`} jsonLd={jsonLd}>
+  <article>
+    <PageHero eyebrow="Blog" eyebrowHref="/blog/" title={post.title} art={post.cover} artWidth={640} artHeight={360} artFrame>
+      <p class="mt-4 text-sm text-mist/60">
+        <time datetime={post.publishDate}>
+          {new Date(post.publishDate).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}
+        </time>
+        <span aria-hidden="true"> &middot; </span>
+        {post.readTime}
+      </p>
+    </PageHero>
+
+    <section class="mx-auto max-w-3xl space-y-10 px-5 py-16 text-sm leading-relaxed text-ink/70 dark:text-smoke sm:text-base">
+      <p>
+        Gaming is the hardest niche to design for, because the footage is already loud. A Fortnite
+        thumbnail has to cut through bright skins, effects, and a crowded map, then stay readable when
+        YouTube shrinks it to a few hundred pixels. This guide covers the size, the thumbnail
+        background, the layout, and the checks that make a Fortnite thumbnail hold up on a phone.
+      </p>
+
+      <div>
+        <h2 class="font-display text-2xl font-bold text-ink dark:text-fog">Start With the Right YouTube Thumbnail Size</h2>
+        <p class="mt-4">
+          A Fortnite thumbnail uses the same <strong>YouTube thumbnail size</strong> as any other
+          video: 1280×720 pixels, 16:9, under 2MB. Set your canvas to that before you place anything.
+          Screenshots captured at 1920×1080 share the ratio, so they scale down without cropping.
+          The details are in our
+          <a href="/faq/#is-youtube-thumbnail-size-1280x720-or-1920x1080" class="text-red-dark dark:text-red underline underline-offset-2">YouTube thumbnail size FAQ</a>.
+        </p>
+      </div>
+
+      <div>
+        <h2 class="font-display text-2xl font-bold text-ink dark:text-fog">Pick a Thumbnail Background That Calms the Scene</h2>
+        <p class="mt-4">
+          In gameplay footage, the thumbnail background is usually the problem. Storm effects,
+          buildings, and other players all fight for attention with your character. Three fixes work
+          reliably: a bold gradient behind a cut-out character, a heavily blurred crop of the map, or
+          a darkened gameplay frame so the subject glows against it. Whichever you choose, keep the
+          thumbnail background simpler than the screenshot it came from.
+        </p>
+        <p class="mt-4">
+          If you're stuck between two backgrounds, test both. Our
+          <a href="/" class="text-red-dark dark:text-red underline underline-offset-2">free thumbnail analyzer</a>
+          scores contrast and focal point, so the cleaner option usually shows up as a higher mobile score.
+        </p>
+      </div>
+
+      <div>
+        <h2 class="font-display text-2xl font-bold text-ink dark:text-fog">Build the Fortnite Thumbnail Step by Step</h2>
+        <ol class="mt-4 list-decimal space-y-4 pl-5">
+          <li>
+            <strong class="text-ink dark:text-fog">Capture a clean subject.</strong> Use a replay or
+            the lobby to grab your character mid-pose or mid-emote, without the HUD in the way.
+          </li>
+          <li>
+            <strong class="text-ink dark:text-fog">Cut it out.</strong> Remove the surrounding scene so the
+            character can sit on a thumbnail background of your choice. Canva, Photopea, and Photoshop all handle this.
+          </li>
+          <li>
+            <strong class="text-ink dark:text-fog">Place it large and off-center.</strong> The character
+            should fill a third to half of the frame, leaving the other side for text.
+          </li>
+          <li>
+            <strong class="text-ink dark:text-fog">Add three to five words.</strong> A skin name, a result,
+            or a challenge. Use a heavy font with a dark outline so it survives small sizes.
+          </li>
+          <li>
+            <strong class="text-ink dark:text-fog">Export and check it small.</strong> Save as a JPG under
+            2MB, then shrink the preview to phone size and confirm that both the character and the text still read.
+          </li>
+        </ol>
+      </div>
+
+      <div>
+        <h2 class="font-display text-2xl font-bold text-ink dark:text-fog">Learning From Other Fortnite Thumbnails</h2>
+        <p class="mt-4">
+          Studying what top gaming channels do is a fast way to improve. You can pull any public
+          YT thumbnail by its direct image link, so you don't need a thumbnail downloader site. Our
+          <a href="/blog/how-to-download-a-youtube-thumbnail/" class="text-red-dark dark:text-red underline underline-offset-2">guide to downloading a YouTube thumbnail</a>
+          shows how. Use references to understand composition, text placement, and color, then make
+          your own version rather than copying artwork.
+        </p>
+      </div>
+
+      <div>
+        <h2 class="font-display text-2xl font-bold text-ink dark:text-fog">Check Your Fortnite Thumbnail Before Publishing</h2>
+        <p class="mt-4">
+          Gaming thumbnails often look great full-size and fall apart on a phone. Run yours through
+          the analyzer, and if the mobile score trails the web score, enlarge the text or simplify the
+          background. For a broader walkthrough of tools and layout, see our
+          <a href="/blog/how-to-make-a-youtube-thumbnail/" class="text-red-dark dark:text-red underline underline-offset-2">guide to making a YouTube thumbnail</a>.
+        </p>
+      </div>
+
+      <div>
+        <h2 class="font-display text-2xl font-bold text-ink dark:text-fog">Fortnite Thumbnail Questions</h2>
+        <div class="mt-4 divide-y divide-ink/10 dark:divide-seam">
+          {microFaqs.map((f) => (
+            <div class="py-5 first:pt-0">
+              <h3 class="font-display text-base font-semibold text-ink dark:text-fog">{f.q}</h3>
+              <p class="mt-2">{f.a}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  </article>
+</Layout>

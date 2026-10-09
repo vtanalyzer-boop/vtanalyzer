@@ -31,6 +31,18 @@ const microFaqs = [
     a: "You don't need Photoshop. Canva, Adobe Express, and Fotor all offer free tiers built specifically for social and thumbnail sizes, with layers, text, and stock photos included. Photoshop is useful for advanced compositing, not required for a solid thumbnail.",
   },
   {
+    q: "What is the best background for a YouTube thumbnail?",
+    a: "The best thumbnail background is simple enough that your subject and headline stay readable at phone size. Solid colors, gradients, and blurred or darkened scene backgrounds work well, while detailed photos directly behind text usually don't. If you can't pick your subject out when the image is shrunk to a thumbnail-sized preview, simplify the background.",
+  },
+  {
+    q: "Can I use a thumbnail downloader to get a base image for my design?",
+    a: "Only for your own videos, and even then it's simpler to export the frame from your editor at full quality. Using a thumbnail downloader on someone else's video to reuse their artwork isn't a good idea, since it's still their copyrighted work.",
+  },
+  {
+    q: "Is there a good template for a Fortnite thumbnail?",
+    a: "Canva and Photopea both have gaming-style templates you can adapt. The structure to copy is a cut-out character on the left or right, a bright gradient or darkened background, and a short bold headline on the opposite side. Swap in your own screenshot rather than reusing someone else's artwork.",
+  },
+  {
     q: "How to do thumbnails for YouTube that actually get clicks?",
     a: "Design for how it looks small, not how it looks full-size. Zoom your draft out to roughly 120px wide (about how it appears in search and suggested videos) — if the subject and text are still readable at that size, it'll hold up in the feed.",
   },
@@ -84,7 +96,7 @@ const jsonLd = [
         <h2 class="font-display text-2xl font-bold text-ink dark:text-fog">What Is the YouTube Thumbnail Size?</h2>
         <p class="mt-4">
           YouTube's recommended thumbnail size is <strong>1280×720 pixels</strong>, at a 16:9 aspect
-          ratio, with a 2MB file size cap and a 640-pixel-wide minimum. Design at 1280×720 directly —
+          ratio, with a 2MB file size cap and a 640-pixel-wide minimum. Design at 1280×720 directly, since that YouTube thumbnail size avoids any resizing —
           uploading something in a different ratio (a square Instagram export, a 4:3 photo) means
           YouTube auto-crops it to fit, which regularly cuts off faces or text near the edges. For the
           full breakdown of measurements, resolution, and aspect ratio,
@@ -129,6 +141,35 @@ const jsonLd = [
       </div>
 
       <div>
+        <h2 class="font-display text-2xl font-bold text-ink dark:text-fog">How to Choose a Thumbnail Background</h2>
+        <p class="mt-4">
+          The thumbnail background is the part beginners tend to get wrong, usually by leaving the
+          video frame as it is. A cluttered background pulls the eye away from your subject and
+          swallows your text once the image shrinks. Three approaches hold up well: a solid or
+          gradient color that contrasts with your subject, a blurred copy of the original scene, or
+          a darkened version of the frame so bright text and faces pop. If your subject was shot
+          against a messy room, most editors, including Canva's free plan, can cut it out so you can
+          place it over a cleaner background.
+        </p>
+        <p class="mt-4">
+          Match the background to your channel, too. A consistent palette makes your videos easy to
+          recognize in a feed, which matters more over a full library than any single design choice.
+        </p>
+      </div>
+
+      <div>
+        <h2 class="font-display text-2xl font-bold text-ink dark:text-fog">Example: Making a Fortnite Thumbnail</h2>
+        <p class="mt-4">
+          Gaming is a good test case because the source footage is so busy. For a Fortnite
+          thumbnail, capture a clean screenshot or render of your character mid-action, cut it out,
+          and place it over a bold gradient or a darkened, blurred slice of the map. Add a short
+          headline, such as the skin name or the challenge, in a heavy font with a dark outline.
+          Resist the urge to include every item from the match; one character and one idea read
+          better at phone size than a crowded scene. The same approach works for any other game, and our <a href="/blog/how-to-make-a-fortnite-thumbnail/" class="text-red-dark dark:text-red underline underline-offset-2">full Fortnite thumbnail guide</a> goes deeper.
+        </p>
+      </div>
+
+      <div>
         <h2 class="font-display text-2xl font-bold text-ink dark:text-fog">Tools People Actually Use</h2>
         <p class="mt-4">
           <strong class="text-ink dark:text-fog">Canva</strong> is the most common starting point —
@@ -140,7 +181,8 @@ const jsonLd = [
           <strong class="text-ink dark:text-fog">GIMP</strong> give full control but a steeper
           learning curve. And for a frame straight from the video itself, your video editor's
           "export frame" or "snapshot" tool — CapCut, Premiere, and DaVinci Resolve all have one — is
-          the fastest path from footage to a base image.
+          the fastest path from footage to a base image. You won't need a thumbnail downloader for
+          your own videos; export the frame directly instead of saving it from YouTube.
         </p>
       </div>
 

@@ -5,9 +5,17 @@ import PageHero from "../../components/PageHero.astro";
 const title = "About VT Analyzer — Why We Built a Free YouTube Thumbnail Checker";
 const description =
   "VT Analyzer helps creators check YouTube thumbnails with a free thumbnail checker built from real click-through-rate research, not generic design advice.";
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Kamlesh Mohabe",
+  jobTitle: "Digital Proprietor & Software Engineer",
+  worksFor: { "@type": "Organization", name: "VT Analyzer", url: "https://vtanalyzer.site/" },
+};
 ---
 
-<Layout title={title} description={description} path="/about/">
+<Layout title={title} description={description} path="/about/" jsonLd={jsonLd}>
   <PageHero eyebrow="About" title="Built by Creators Tired of Guessing" description="VT Analyzer exists because great videos still get skipped over when the thumbnail doesn't earn the click." art="/img/hero/hero-about.svg" />
 
   <section class="mx-auto max-w-3xl space-y-16 px-5 py-20">
@@ -30,7 +38,9 @@ const description =
         at a tiny size, in a feed full of competing images. Generic design advice doesn't account
         for that context. Our scoring model is built specifically around how thumbnails are actually
         displayed on YouTube — mobile search results, the desktop homepage grid, and suggested
-        videos — rather than treating a thumbnail like any other graphic.
+        videos — rather than treating a thumbnail like any other graphic. That covers everything
+        from YouTube thumbnail size and thumbnail background choices to gaming styles like a
+        Fortnite thumbnail. Whether you upload a fresh design or a saved YT thumbnail you want to learn from, the analyzer treats it the same way.
       </p>
     </div>
 
@@ -89,6 +99,21 @@ const description =
         exported from Canva, the same underlying readability and contrast principles apply, and the
         analyzer scores all of them on the same scale.
       </p>
+    </div>
+
+    <div>
+      <h2 class="font-display text-2xl font-bold text-ink dark:text-fog">Platform Manager</h2>
+      <div class="mt-4 flex items-center gap-5 rounded-sm border border-ink/10 dark:border-seam bg-paper-dim dark:bg-night-dim p-6">
+        <div class="flex h-16 w-16 shrink-0 items-center justify-center rounded-full bg-red/10 font-display text-xl font-bold text-red" aria-hidden="true">KM</div>
+        <div>
+          <p class="font-display text-lg font-bold text-ink dark:text-fog">Kamlesh Mohabe</p>
+          <p class="mt-1 text-sm text-ink/60 dark:text-smoke">Digital Proprietor &amp; Software Engineer</p>
+          <p class="mt-2 text-sm leading-relaxed text-ink/65 dark:text-smoke">
+            Kamlesh manages the VT Analyzer platform. For questions, feedback, or support, reach the team through our
+            <a href="/contact/" class="text-red-dark dark:text-red underline underline-offset-2">contact page</a>.
+          </p>
+        </div>
+      </div>
     </div>
 
     <div>

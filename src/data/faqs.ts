@@ -1,15 +1,15 @@
 export interface Faq {
   question: string;
   answer: string;
-  category: "Basics" | "Sizing & Specs" | "Tools & Creation" | "Testing & Optimization" | "Rules & Policy";
+  category: "Basics" | "Sizing & Specs" | "Tools & Creation" | "Testing & Optimization" | "Rules & Policy" | "Pay & Careers";
 }
 
-export const faqs: Faq[] = [
+const allFaqs: Faq[] = [
   {
     category: "Basics",
     question: "What is a thumbnail?",
     answer:
-      "A thumbnail is the small preview image that represents a piece of video or media content before it's opened or played. On platforms like YouTube, a thumbnail is the first thing a viewer sees in search results, suggested videos, and playlists, so its job is to summarize the video and earn the click. A strong thumbnail is clear at a small size, uses high contrast, and gives a viewer a reason to watch.",
+      "A thumbnail is the small preview image that represents a piece of video or media content before it's opened or played. On platforms like YouTube, a thumbnail is the first thing a viewer sees in search results, suggested videos, and playlists, so its job is to summarize the video and earn the click. A strong thumbnail is clear at a small size, uses high contrast, and gives a viewer a reason to watch. Online, the word usually means a video's cover image (a YouTube thumbnail), though it can also mean a small preview of any image or file. For YouTube, the recommended thumbnail size is 1280×720 pixels at a 16:9 ratio.",
   },
   {
     category: "Basics",
@@ -91,21 +91,75 @@ export const faqs: Faq[] = [
   },
   {
     category: "Tools & Creation",
-    question: "How do I create a MrBeast-style thumbnail?",
+    question: "How do I create a MrBeast thumbnail?",
     answer:
-      "MrBeast-style thumbnails typically combine a few repeatable elements: an exaggerated, high-emotion facial expression shot close-up, bold and often yellow or white outlined text with a thick black stroke for contrast, a saturated and slightly oversaturated color grade, and a clear visual of the video's core hook (money, a challenge, or a dramatic object) placed next to the subject. To recreate the look, shoot or select a high-energy expression, boost saturation and contrast in editing, add short punchy text (3–5 words) with a heavy outlined font, and keep the composition simple with one obvious focal point rather than a cluttered scene.",
+      "MrBeast-style thumbnails typically combine a few repeatable elements: an exaggerated, high-emotion facial expression shot close-up, bold and often yellow or white outlined text with a thick black stroke for contrast, a saturated and slightly oversaturated color grade, and a clear visual of the video's core hook (money, a challenge, or a dramatic object) placed next to the subject. To recreate the look, shoot or select a high-energy expression, boost saturation and contrast in editing, add short punchy text (3–5 words) with a heavy outlined font, and keep the composition simple with one obvious focal point rather than a cluttered scene. MrBeast's own team is known for testing many variations of each thumbnail before choosing one, so make two or three versions of yours and compare them in the analyzer rather than settling on the first draft.",
   },
   {
     category: "Tools & Creation",
     question: "How do I make a Fortnite thumbnail?",
     answer:
-      "A strong Fortnite thumbnail usually pairs a dynamic in-game screenshot or character render — mid-action, with a skin or emote clearly visible — against a bold, high-contrast background, plus short bold text calling out the video's hook (a win, a rare skin, or a challenge). Tools like Canva, Photopea, or Photoshop offer Fortnite-thumbnail templates you can adapt, or you can capture a clean 1280×720 in-game screenshot, cut out your character, and place it over a bright gradient or gameplay background with a text callout.",
+      "A strong Fortnite thumbnail usually pairs a dynamic in-game screenshot or character render — mid-action, with a skin or emote clearly visible — against a bold, high-contrast background, plus short bold text calling out the video's hook (a win, a rare skin, or a challenge). Tools like Canva, Photopea, or Photoshop offer Fortnite-thumbnail templates you can adapt, or you can capture a clean 1280×720 in-game screenshot, cut out your character, and place it over a bright gradient or darkened gameplay background with a text callout. Keep the thumbnail background simpler than the screenshot it came from, because Fortnite's colorful scenery easily swallows a small subject.",
   },
   {
     category: "Tools & Creation",
     question: "Can ChatGPT make a YouTube thumbnail?",
     answer:
       "ChatGPT can generate an original thumbnail image directly (through its built-in image generation) if you describe the subject, composition, colors, and any text you want on it, and it can also write thumbnail text ideas, headline variations, or a design brief you then hand to a tool like Canva or Photoshop. Because AI-generated text inside images isn't always crisp, many creators use ChatGPT to generate the background or scene, then add the final bold headline text separately in a design tool for maximum readability.",
+  },
+  {
+    category: "Tools & Creation",
+    question: "What makes a good YouTube thumbnail background?",
+    answer:
+      "A good thumbnail background supports your subject instead of competing with it. Solid colors, soft gradients, a blurred copy of the scene, or a darkened gameplay frame all work because they keep the subject and headline readable at small sizes. Avoid dense patterns and high-detail photos directly behind text. A quick check is to shrink the thumbnail to phone size; if your subject no longer stands out from the background, increase the contrast or simplify the backdrop and test it again in the analyzer.",
+  },
+  {
+    category: "Tools & Creation",
+    question: "How do I use a thumbnail downloader safely?",
+    answer:
+      "The safest thumbnail downloader is no third-party tool at all. Every YouTube video's thumbnail sits at a public image link built from its video ID, so you can open that link and save the file yourself. If you do use a website for downloading a YT thumbnail, avoid any that ask for a login, a browser extension, or software install, since you never need those for a public image. Only download thumbnails for personal reference or your own channel, and don't republish another creator's artwork. Our blog guide on downloading a YouTube thumbnail shows the direct-link method step by step.",
+  },
+  {
+    category: "Sizing & Specs",
+    question: "What is the right YT thumbnail size for mobile and desktop?",
+    answer:
+      "You don't need a separate file for each device. Upload a single 1280×720 image at 16:9 and YouTube scales it for phones, tablets, and desktop. What changes is how big it appears: on mobile it can be shown very small, so text and subject need to stay readable when shrunk. That's why our analyzer gives separate mobile and web scores for the same YouTube thumbnail size.",
+  },
+  {
+    category: "Tools & Creation",
+    question: "How do I download a YT thumbnail in HD?",
+    answer:
+      "To download a YT thumbnail in HD, find the video ID in the link and open the image address that ends in maxresdefault.jpg. That file is 1280×720, the highest resolution YouTube stores, and you can save it with a right-click or a long-press. No thumbnail downloader is required. If that file returns an error, the video wasn't uploaded in HD, so try the sddefault or hqdefault versions instead.",
+  },
+  {
+    category: "Rules & Policy",
+    question: "Is it legal to use a thumbnail downloader?",
+    answer:
+      "Using a thumbnail downloader to save an image for personal reference, research, or critique is generally treated as reasonable, and downloading your own channel's thumbnails is always fine. The line is republishing another creator's thumbnail as your own or using it commercially without permission, because it remains their copyrighted work. This is general information, not legal advice. When in doubt, ask the creator or use the image only as inspiration for your own design.",
+  },
+  {
+    category: "Sizing & Specs",
+    question: "What is the minimum YouTube thumbnail size?",
+    answer:
+      "The minimum YouTube thumbnail size is 640 pixels wide, and YouTube recommends 1280×720 at a 16:9 ratio. Anything narrower than 640 pixels is rejected or looks blurry once scaled up. Treat 640 wide as the floor and 1280×720 as the target, since a larger YouTube thumbnail size within the 2MB limit keeps text and faces sharp across every placement.",
+  },
+  {
+    category: "Tools & Creation",
+    question: "Which YT thumbnail size works best for gaming videos?",
+    answer:
+      "Gaming videos use the same YT thumbnail size as everything else: 1280×720 at 16:9. What differs is the content. Gameplay footage is busy, so a Fortnite thumbnail or other gaming cover benefits from a cut-out character, a simple thumbnail background, and three to five words of high-contrast text. Capture screenshots at 1920×1080 or higher, then export the final thumbnail at 1280×720.",
+  },
+  {
+    category: "Pay & Careers",
+    question: "How much do thumbnail artists get paid?",
+    answer:
+      "Thumbnail artist pay varies widely. Freelancers commonly charge about $5 to $50 per thumbnail for beginner and mid-level work, while experienced designers who study a channel's analytics often charge $100 to $300 or more per thumbnail. Hourly figures are around $20 to $25 in the US, and designers who work through volume packages or retainers usually charge less per image. What you earn depends on your skill, speed, the client's budget, and whether you work per thumbnail, per package, or on a monthly retainer. These are commonly cited market ranges, not guarantees. Read our full breakdown in the guide to thumbnail artist pay.",
+  },
+  {
+    category: "Pay & Careers",
+    question: "How much does MrBeast pay for a thumbnail?",
+    answer:
+      "MrBeast has said he pays around $10,000 for a thumbnail, and that figure has been widely reported. His team reportedly produces many variations per video and comes up with dozens of thumbnail and title ideas before choosing one. It's a self-reported number for one of the biggest channels on YouTube, so it isn't a typical rate. Most creators pay a small fraction of that, and the figure may have changed over time.",
   },
   {
     category: "Testing & Optimization",
@@ -149,4 +203,17 @@ export const faqs: Faq[] = [
     answer:
       "Yes — YouTube requires phone number verification before it unlocks the ability to upload custom thumbnails, along with other features like longer video uploads. You can verify your channel for free in YouTube Studio under Settings → Channel → Feature eligibility. Without verification, YouTube will only display an auto-generated frame pulled from your video.",
   },
+];
+
+// Priority questions are listed first on the FAQ page and the homepage.
+const priorityQuestions = [
+  "What is a thumbnail?",
+  "How do I create a MrBeast thumbnail?",
+  "How much do thumbnail artists get paid?",
+  "How much does MrBeast pay for a thumbnail?",
+];
+
+export const faqs: Faq[] = [
+  ...priorityQuestions.map((q) => allFaqs.find((f) => f.question === q)!),
+  ...allFaqs.filter((f) => !priorityQuestions.includes(f.question)),
 ];

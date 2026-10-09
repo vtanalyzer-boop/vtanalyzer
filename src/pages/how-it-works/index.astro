@@ -20,7 +20,7 @@ const steps = [
   {
     n: "03",
     title: "Spec Checks",
-    body: "We check resolution against YouTube's recommended 1280×720, verify the 16:9 aspect ratio, and flag file sizes that risk YouTube's 2MB upload limit.",
+    body: "We check resolution against the recommended YouTube thumbnail size of 1280×720, verify the 16:9 aspect ratio, and flag file sizes that risk YouTube's 2MB upload limit.",
   },
   {
     n: "04",
@@ -36,12 +36,12 @@ const steps = [
 
 const factors = [
   { name: "Readability", weight: "20%", detail: "Can the subject and any text be understood in under a second, even at a small size?" },
-  { name: "Contrast", weight: "15%", detail: "Tonal separation between the subject and background so nothing blends in." },
+  { name: "Contrast", weight: "15%", detail: "Tonal separation between the subject and the thumbnail background so nothing blends in." },
   { name: "Focal Point", weight: "15%", detail: "Is there one clear thing the eye lands on first, rather than a cluttered frame?" },
   { name: "Color Saturation", weight: "10%", detail: "Vibrant, punchy colors tend to stand out more in a crowded feed." },
   { name: "Brightness Balance", weight: "10%", detail: "Not too dark, not blown out — a balanced exposure reads clearly on any screen." },
   { name: "Aspect Ratio", weight: "10%", detail: "Matching YouTube's 16:9 standard avoids automatic cropping." },
-  { name: "Resolution", weight: "10%", detail: "Meeting the 1280×720 recommendation keeps the image sharp at every placement." },
+  { name: "Resolution", weight: "10%", detail: "Meeting the recommended YouTube thumbnail size of 1280×720 keeps the image sharp at every placement." },
   { name: "File Size", weight: "10%", detail: "Staying well under the 2MB cap for reliable, fast-loading thumbnails." },
 ];
 ---
@@ -56,7 +56,7 @@ const factors = [
       wanted our SEO score checker to be different: every score it produces should be traceable
       back to a specific, explainable factor, so you understand exactly why a thumbnail scored the
       way it did and what to change first. The five-step process below is what runs every time you
-      check your YouTube thumbnail on our homepage, whether you're reviewing a single image or
+      check your YouTube thumbnail on our homepage, whether you're reviewing a single YT thumbnail or
       comparing a handful of variants before choosing one to publish.
     </p>
   </section>
@@ -107,7 +107,7 @@ const factors = [
       backgrounds disappear entirely. On a laptop or desktop browser, the same image can display
       two to three times larger inside the YouTube homepage grid, where fine detail and secondary
       elements are far more visible. Because most watch time on YouTube happens on mobile devices,
-      a thumbnail that only looks good on a large screen can quietly underperform in the exact
+      a YT thumbnail that only looks good on a large screen can quietly underperform in the exact
       context where it's seen most often.
     </p>
     <p class="mt-4 text-sm leading-relaxed text-ink/65 dark:text-smoke sm:text-base">
@@ -130,6 +130,7 @@ const factors = [
         <li><strong class="text-ink dark:text-fog">Keep text to five words or fewer.</strong> Short, bold headlines survive compression and small display sizes far better than a full sentence.</li>
         <li><strong class="text-ink dark:text-fog">Give faces room to breathe.</strong> Expressions read best when the face isn't cropped too tight against the frame edge or competing with busy text nearby.</li>
         <li><strong class="text-ink dark:text-fog">Use an outline or drop shadow behind text.</strong> A one to two pixel dark outline keeps light-colored text legible over almost any background.</li>
+        <li><strong class="text-ink dark:text-fog">Simplify the thumbnail background.</strong> If your contrast or focal point score is low, the background is usually the cause. A blurred, darkened, or solid-color backdrop makes the subject easier to spot, which is especially useful for busy gaming shots like a Fortnite thumbnail.</li>
         <li><strong class="text-ink dark:text-fog">Re-check after every major edit.</strong> Small changes — a recolored background, a resized headline — can shift your score more than expected, so it's worth a quick re-analysis before publishing.</li>
       </ul>
     </div>
