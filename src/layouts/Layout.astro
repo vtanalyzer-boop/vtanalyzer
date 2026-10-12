@@ -46,8 +46,10 @@ const { title, description, path, ogImage, noindex, jsonLd } = Astro.props;
 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
-    <script src="https://quge5.com/88/tag.min.js" data-zone="291880" async data-cfasync="false"></script>
-    <meta name="monetag" content="963de2dbc1252b448a1dbef2746b74ed">
+    <!-- Monetag: site verification + ad tag -->
+    <meta name="monetag" content="963de2dbc1252b448a1dbef2746b74ed" />
+    <script is:inline src="https://quge5.com/88/tag.min.js" data-zone="291880" async data-cfasync="false"></script>
+
     <!-- Apply saved/system theme before first paint to avoid a light/dark flash -->
     <script is:inline>
       (function () {
