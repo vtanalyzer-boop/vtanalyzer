@@ -15,9 +15,9 @@ export const blogPosts: BlogPost[] = [
   {
     slug: "how-to-make-a-youtube-thumbnail",
     title: "How to Make a YouTube Thumbnail: The Complete Guide",
-    seoTitle: "Make a YouTube Thumbnail: Size, Background & Tools | VT Analyzer",
+    seoTitle: "How to Make a YouTube Thumbnail: Size & Tools | VT Analyzer",
     description:
-      "A complete guide to making a YouTube thumbnail — the right YouTube thumbnail size, how to pick a thumbnail background, free tools like Canva, phone-only methods, and the design habits that raise click-through rate.",
+      "Make a YouTube thumbnail step by step: the right size, how to pick a background, free tools like Canva, phone-only methods and design habits that raise CTR.",
     excerpt:
       "Every method for making a YouTube thumbnail, from free desktop tools to phone-only apps — plus the exact size, ratio, and design habits that separate thumbnails people click from thumbnails people scroll past.",
     publishDate: "2026-08-20",
@@ -27,9 +27,9 @@ export const blogPosts: BlogPost[] = [
   {
     slug: "how-to-download-a-youtube-thumbnail",
     title: "How to Download a YouTube Thumbnail (Any Resolution, Free)",
-    seoTitle: "YouTube Thumbnail Downloader Guide: Save Any YT Thumbnail in HD | VT Analyzer",
+    seoTitle: "Download a YouTube Thumbnail in HD | VT Analyzer",
     description:
-      "How to download a YouTube thumbnail in HD with no thumbnail downloader needed — by link or video ID, on desktop or mobile — plus what to do when you want an Instagram thumbnail instead.",
+      "Download a YouTube thumbnail in HD by link or video ID, on desktop or mobile, with no thumbnail downloader needed. Includes every resolution YouTube serves.",
     excerpt:
       "The direct-link method for pulling any YouTube thumbnail at its highest available resolution, a quick resolution guide, and why Instagram thumbnails need a different approach entirely.",
     publishDate: "2026-08-22",
@@ -39,7 +39,7 @@ export const blogPosts: BlogPost[] = [
   {
     slug: "how-to-make-a-fortnite-thumbnail",
     title: "How to Make a Fortnite Thumbnail That Gets Clicks",
-    seoTitle: "Fortnite Thumbnail Guide: Size, Background & Layout | VT Analyzer",
+    seoTitle: "Fortnite Thumbnail Guide: Size & Layout | VT Analyzer",
     description:
       "Learn how to make a Fortnite thumbnail: the right YouTube thumbnail size, the best thumbnail background, a step-by-step layout, and how to test it on mobile.",
     excerpt:
@@ -51,7 +51,7 @@ export const blogPosts: BlogPost[] = [
   {
     slug: "how-much-do-thumbnail-artists-get-paid",
     title: "How Much Do Thumbnail Artists Get Paid? (And What MrBeast Pays)",
-    seoTitle: "How Much Do Thumbnail Artists Get Paid? Rates & MrBeast | VT Analyzer",
+    seoTitle: "How Much Do Thumbnail Artists Get Paid? | VT Analyzer",
     description:
       "How much do YouTube thumbnail artists get paid? Typical per-thumbnail and hourly rates, what affects pricing, and what MrBeast reportedly pays for a thumbnail.",
     excerpt:

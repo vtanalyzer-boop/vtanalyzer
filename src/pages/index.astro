@@ -5,9 +5,9 @@ import FaqAccordion from "../components/FaqAccordion.astro";
 import { faqs } from "../data/faqs";
 import { blogPosts } from "../data/blogPosts";
 
-const title = "YouTube Thumbnail Checker — Size, Score & Preview | VT Analyzer";
+const title = "YouTube Thumbnail Checker: Score & Preview | VT Analyzer";
 const description =
-  "Check your YouTube thumbnail size, score, and readability for free. Preview any YT thumbnail on mobile vs. web and boost your click-through rate.";
+  "Free YouTube thumbnail checker: score readability and contrast, check size, and preview mobile vs. web before you publish. No signup needed.";
 
 const homeFaqs = faqs.filter((f) =>
   [
@@ -98,6 +98,7 @@ const stats = [
 ---
 
 <Layout title={title} description={description} path="/" jsonLd={jsonLd}>
+  <link slot="head" rel="preload" as="image" href="/img/hero/hero-home.svg" fetchpriority="high" media="(min-width: 1024px)" />
   <!-- Hero -->
   <section class="hero relative isolate overflow-hidden bg-void text-mist">
     <div class="hero-bg pointer-events-none absolute inset-0 -z-10" aria-hidden="true">
@@ -116,10 +117,11 @@ const stats = [
         <h1 class="mt-5 font-display text-4xl font-bold leading-tight sm:text-5xl">
           Check Your <span class="text-red">YouTube Thumbnail</span> Before It Costs You Clicks
         </h1>
-        <p class="mt-5 max-w-lg text-base leading-relaxed text-mist/65 sm:text-lg">
-          Upload any YT thumbnail and our thumbnail checker instantly scores readability, contrast,
-          focal point, and mobile appearance — the exact factors that decide whether a viewer
-          clicks or scrolls past.
+        <p class="mt-5 max-w-lg text-base leading-relaxed text-mist/75 sm:text-lg">
+          <strong class="font-semibold text-mist">VT Analyzer is a free YouTube thumbnail checker.</strong>
+          Upload a thumbnail to get a score for readability, contrast, focal point and mobile
+          appearance, plus a mobile vs. web preview and specific fixes. It runs in your browser,
+          with no signup.
         </p>
         <!-- Typing line: decorative, so the H1 + intro stay static for SEO/LCP. The
              first phrase is real text, so it also reads fine without JavaScript. -->
@@ -143,8 +145,9 @@ const stats = [
             src="/img/hero/hero-home.svg"
             width="640"
             height="360"
-            alt=""
-            loading="lazy"
+            alt="Example YouTube thumbnail with a thumbnail score of 87"
+            loading="eager"
+            fetchpriority="high"
             decoding="async"
             class="h-full w-full object-cover"
           />
@@ -209,48 +212,79 @@ const stats = [
       <h2 class="mt-3 font-display text-3xl font-bold text-ink dark:text-fog sm:text-4xl">
         What Actually Makes a YouTube Thumbnail Work
       </h2>
-      <div class="prose-custom mt-6 space-y-5 text-ink/70 dark:text-smoke">
+      <div class="prose-custom mt-6 space-y-4 text-ink/70 dark:text-smoke">
         <p>
           A YouTube thumbnail's only job is to earn the click without misrepresenting the video.
-          The <a href="/faq/#is-youtube-thumbnail-size-1280x720-or-1920x1080" class="text-red-dark dark:text-red underline underline-offset-2">recommended YouTube thumbnail size is 1280×720 pixels</a>
-          at a <a href="/faq/#what-is-the-youtube-thumbnail-aspect-ratio" class="text-red-dark dark:text-red underline underline-offset-2">16:9 aspect ratio</a>,
-          under a 2MB file limit — get that size wrong and YouTube crops, stretches, or scales your
-          image automatically, distorting text and faces.
+          Get these three specs right first:
+        </p>
+        <ul class="list-disc space-y-2 pl-6">
+          <li><strong>Size:</strong> the <a href="/faq/#is-youtube-thumbnail-size-1280x720-or-1920x1080" class="text-red-dark dark:text-red underline underline-offset-2">recommended YouTube thumbnail size is 1280×720 pixels</a>.</li>
+          <li><strong>Aspect ratio:</strong> a <a href="/faq/#what-is-the-youtube-thumbnail-aspect-ratio" class="text-red-dark dark:text-red underline underline-offset-2">16:9 aspect ratio</a>.</li>
+          <li><strong>File size:</strong> under the 2MB limit.</li>
+        </ul>
+        <p>
+          Get the size wrong and YouTube crops, stretches or scales your image automatically,
+          which distorts text and faces.
+        </p>
+      </div>
+
+      <h3 class="mt-12 font-display text-xl font-bold text-ink dark:text-fog sm:text-2xl">
+        What Winning Thumbnails Have in Common
+      </h3>
+      <div class="prose-custom mt-4 space-y-4 text-ink/70 dark:text-smoke">
+        <p>The thumbnails that consistently win attention share a small set of traits:</p>
+        <ul class="list-disc space-y-2 pl-6">
+          <li>High contrast between the subject and the background.</li>
+          <li>One obvious focal point.</li>
+          <li>Bold, legible text at a small size.</li>
+          <li>Colors that stand out in a crowded feed.</li>
+        </ul>
+        <p>
+          Whether you're building a <strong>MrBeast-style</strong> reaction thumbnail, a
+          <strong>Fortnite thumbnail</strong> from a gameplay clip, or a tutorial cover in
+          <strong>Canva</strong>, those fundamentals don't change.
+        </p>
+      </div>
+
+      <h3 class="mt-12 font-display text-xl font-bold text-ink dark:text-fog sm:text-2xl">
+        What a Thumbnail Analyzer Measures
+      </h3>
+      <div class="prose-custom mt-4 space-y-4 text-ink/70 dark:text-smoke">
+        <p>
+          A thumbnail analyzer replaces gut feel with measurable signals. Our free tool checks your
+          YouTube thumbnail's ratio, contrast and composition against the factors most closely tied
+          to click-through rate.
         </p>
         <p>
-          Beyond specs, the thumbnails that consistently win attention share a small set of traits:
-          high contrast between subject and background, one obvious focal point, bold and legible
-          text at a small size, and colors that stand out in a crowded feed. Whether you're building
-          a <strong>MrBeast-style</strong> reaction thumbnail, a <strong>Fortnite thumbnail</strong>
-          from a gameplay clip, or a tutorial cover in <strong>Canva</strong>, those fundamentals
-          don't change.
-        </p>
-        <p>
-          That's what a thumbnail analyzer measures. Instead of relying on gut feel, use our free
-          tool to check your YouTube thumbnail's ratio, contrast, and composition against the
-          signals most closely tied to click-through rate, then see exactly how it looks on mobile
-          versus desktop before you publish.
+          It then shows exactly how the thumbnail looks on mobile versus desktop, so you can fix
+          problems before you publish.
         </p>
       </div>
 
       <h3 class="mt-12 font-display text-xl font-bold text-ink dark:text-fog sm:text-2xl">
         Choosing a Thumbnail Background That Doesn't Fight Your Subject
       </h3>
-      <div class="prose-custom mt-4 space-y-5 text-ink/70 dark:text-smoke">
+      <div class="prose-custom mt-4 space-y-4 text-ink/70 dark:text-smoke">
         <p>
           The thumbnail background does more work than most creators give it credit for. A
           background that's too detailed makes your subject and headline compete with it, and the
-          problem gets worse when the image shrinks to phone size. The safest approaches are a
-          solid or gradient color, a blurred version of the scene behind you, or a darkened
-          gameplay frame. Whichever you pick, the test is simple: shrink the image and check that
-          your subject still separates cleanly from what's behind it. Our contrast and focal-point
-          scores flag a busy background before you upload.
+          problem gets worse when the image shrinks to phone size.
         </p>
         <p>
-          Gaming thumbnails are where this matters most, and the same YouTube thumbnail size applies whether you play Fortnite or make tutorials. A good <strong>Fortnite thumbnail</strong>
-          usually pairs a cut-out character or skin with a bright, simple backdrop so the player
-          stays readable against the chaos of a battle screenshot. If you're comparing options, run
-          each version through the analyzer and pick the one with the stronger mobile score. Our
+          The safest approaches are a solid or gradient color, a blurred version of the scene
+          behind you, or a darkened gameplay frame. Whichever you pick, shrink the image and check
+          that your subject still separates cleanly from what's behind it. Our contrast and
+          focal-point scores flag a busy background before you upload.
+        </p>
+        <p>
+          Gaming thumbnails are where this matters most, and the same YouTube thumbnail size
+          applies whether you play Fortnite or make tutorials. A good <strong>Fortnite thumbnail</strong>
+          usually pairs a cut-out character or skin with a bright, simple backdrop, so the player
+          stays readable against the chaos of a battle screenshot.
+        </p>
+        <p>
+          If you're comparing options, run each version through the analyzer and pick the one with
+          the stronger mobile score. Our
           <a href="/blog/how-to-make-a-fortnite-thumbnail/" class="text-red-dark dark:text-red underline underline-offset-2">Fortnite thumbnail guide</a>
           walks through the full layout.
         </p>
@@ -259,15 +293,21 @@ const stats = [
       <h3 class="mt-12 font-display text-xl font-bold text-ink dark:text-fog sm:text-2xl">
         Studying Other Creators' Thumbnails
       </h3>
-      <div class="prose-custom mt-4 space-y-5 text-ink/70 dark:text-smoke">
+      <div class="prose-custom mt-4 space-y-4 text-ink/70 dark:text-smoke">
         <p>
-          A lot of creators study what's working in their niche before designing their own, and
-          saving a YT thumbnail for reference is a common first step. If you
-          want a reference image, the safest route is the direct-link method rather than a random
-          thumbnail downloader site. We walk through it in our
+          Many creators study what's working in their niche before designing their own, and saving
+          a YT thumbnail for reference is a common first step. The safest route is the direct-link
+          method rather than a random thumbnail downloader site.
+        </p>
+        <p>
+          We walk through it in our
           <a href="/blog/how-to-download-a-youtube-thumbnail/" class="text-red-dark dark:text-red underline underline-offset-2">guide to downloading a YouTube thumbnail</a>,
-          including every resolution YouTube serves, so you don't need a thumbnail downloader or any extra software. Once you have the file, drop it into the
-          analyzer to see why it scores the way it does, then use our
+          including every resolution YouTube serves, so you don't need a thumbnail downloader or any
+          extra software.
+        </p>
+        <p>
+          Once you have the file, drop it into the analyzer to see why it scores the way it does.
+          Then use our
           <a href="/blog/how-to-make-a-youtube-thumbnail/" class="text-red-dark dark:text-red underline underline-offset-2">guide to making a YouTube thumbnail</a>
           to apply those lessons to your own design.
         </p>

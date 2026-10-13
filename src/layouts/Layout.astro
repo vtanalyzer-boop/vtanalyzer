@@ -45,6 +45,7 @@ const { title, description, path, ogImage, noindex, jsonLd } = Astro.props;
     <Seo title={title} description={description} path={path} ogImage={ogImage} noindex={noindex} jsonLd={jsonLd} />
 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <slot name="head" />
 
     <!-- Monetag: site verification + ad tag -->
     <meta name="monetag" content="963de2dbc1252b448a1dbef2746b74ed" />
